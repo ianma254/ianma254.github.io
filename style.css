@@ -6,12 +6,25 @@
 }
 
 body {
+  background: #000;
+  overflow: hidden;
+}
+
+.stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('https://i.gifer.com/7Plm.gif') repeat center center;
+  background-size: cover;
+  z-index: -1;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: white;
 }
 
 .container {
@@ -21,13 +34,13 @@ body {
   height: 80vh;
   border-radius: 16px;
   overflow: hidden;
-  background-color: #121212;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  background-color: rgba(18, 18, 30, 0.85);
+  box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
 }
 
 .left {
   flex: 1;
-  background-color: #0d1117;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,19 +59,38 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #1c1c1c;
 }
 
 .right h1 {
   font-size: 2.8em;
-  color: #00ffff;
+  color: #7df9ff;
   margin-bottom: 10px;
+  text-shadow: 0 0 10px #00ffff;
 }
 
 .right h2 {
   font-size: 1.4em;
   color: #ccc;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin-bottom: 15px;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+}
+
+.buttons {
+  position: relative;
+  display: flex;
+  gap: 15px;
 }
 
 button {
@@ -66,9 +98,8 @@ button {
   font-size: 1em;
   border: none;
   border-radius: 30px;
-  margin-bottom: 15px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .signup {
@@ -84,10 +115,10 @@ button {
   background-color: transparent;
   color: #00ffff;
   border: 2px solid #00ffff;
+  position: relative;
 }
 
 .login:hover {
   background-color: #00ffff;
   color: #121212;
 }
-
