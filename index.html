@@ -7,16 +7,28 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="left">
-      <img src="https://i.ibb.co/HBD3t9C/universe-graphic.png" alt="Universe App">
-    </div>
-    <div class="right">
-      <h1>Welcome to Universe</h1>
-      <h2>Connect beyond boundaries.</h2>
-      <button class="signup">Get Started</button>
-      <button class="login">Login</button>
+  <div class="stars"></div>
+  <div class="overlay">
+    <div class="container">
+      <div class="left">
+        <img src="https://i.ibb.co/HBD3t9C/universe-graphic.png" alt="Universe App">
+      </div>
+      <div class="right">
+        <h1>Welcome to Universe</h1>
+        <h2>Connect beyond boundaries.</h2>
+
+        <form id="loginForm">
+          <input type="text" id="username" placeholder="Username" />
+          <input type="password" id="password" placeholder="Password" />
+          <div class="buttons">
+            <button type="button" class="signup">Get Started</button>
+            <button type="submit" class="login" id="loginBtn">Login</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
