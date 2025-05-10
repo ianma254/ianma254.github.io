@@ -1,159 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Universe App - Home</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UniverseApp - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0e1a2b;
-      color: #ffffff;
+      background-color: #0d1a2d; /* dark theme */
+      color: white;
     }
+
     .top-bar {
-      text-align: center;
-      padding: 1em;
-    }
-    .search-bar {
-      width: 60%;
-      padding: 10px;
-      font-size: 16px;
-      background-color: transparent;
-      border: 2px solid #1f3b5a;
-      color: #add8e6;
-      text-align: center;
-    }
-    .tabs {
       display: flex;
-      justify-content: space-around;
-      margin-top: 1em;
-      border-bottom: 1px solid #2f4f6f;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      position: sticky;
+      top: 0;
+      background-color: #0d1a2d;
+      z-index: 1000;
     }
+
+    .search-box {
+      padding: 8px 16px;
+      border-radius: 25px;
+      border: none;
+      background-color: transparent;
+      border: 1px solid #1f3b5b;
+      color: #007acc;
+      font-size: 16px;
+      width: 50%;
+    }
+
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+      background-color: #0d1a2d;
+      border-bottom: 1px solid #1f3b5b;
+    }
+
     .tab {
-      padding: 10px 20px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background-color: #1f3b5b;
+      color: #007acc;
       cursor: pointer;
-      color: #3399ff;
-      position: relative;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
+
     .tab:hover {
-      color: #00ffcc;
-      text-shadow: 0 0 8px #00ffcc;
+      background-color: #003300;
+      color: #00ff99;
     }
-    .tab-content {
-      display: none;
-      padding: 1em;
+
+    .post-feed {
+      padding: 20px;
+      max-width: 750px;
+      margin: auto;
     }
-    .tab-content.active {
-      display: block;
-    }
+
     .post {
-      margin-bottom: 1.5em;
-      max-width: 80%;
-      word-wrap: break-word;
-      font-size: 18px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #1f3b5b;
+      padding-bottom: 20px;
     }
+
+    .post h3 {
+      font-size: 22px;
+    }
+
+    .post p {
+      font-size: 18px;
+      max-width: 75%;
+      word-wrap: break-word;
+    }
+
     .post img {
       max-width: 100%;
-      border-radius: 12px;
+      border-radius: 8px;
       margin-top: 10px;
     }
-    .bottom-menu {
+
+    .bottom-nav {
       position: fixed;
       bottom: 0;
       width: 100%;
-      background-color: #0a1420;
       display: flex;
       justify-content: space-around;
-      border-top: 1px solid #2f4f6f;
+      background-color: #0d1a2d;
+      border-top: 1px solid #1f3b5b;
+      padding: 10px 0;
     }
-    .menu-item {
-      padding: 10px;
+
+    .nav-item {
       text-align: center;
-      color: #3399ff;
+      color: #007acc;
       cursor: pointer;
+      transition: 0.3s;
     }
-    .menu-item i {
-      display: block;
-      font-size: 20px;
-    }
-    .menu-item:hover {
-      color: #00ffcc;
-      text-shadow: 0 0 6px #00ffcc;
+
+    .nav-item:hover {
+      color: #00ff99;
     }
   </style>
 </head>
 <body>
   <div class="top-bar">
-    <input type="text" placeholder="Search..." class="search-bar">
+    <input type="text" class="search-box" placeholder="Search posts or users" />
   </div>
 
-  <div class="tabs">
-    <div class="tab" onclick="showTab('daily')">Daily Update</div>
-    <div class="tab" onclick="showTab('following')">Activities by Following</div>
-    <div class="tab" onclick="showTab('trending')">What's Trending</div>
+  <div class="nav-tabs">
+    <div class="tab" onclick="showTab('update')"><i class="fas fa-bolt"></i> Daily Update</div>
+    <div class="tab" onclick="showTab('activity')"><i class="fas fa-user-friends"></i> Following</div>
+    <div class="tab" onclick="showTab('trending')"><i class="fas fa-fire"></i> Trending</div>
   </div>
 
-  <div id="daily" class="tab-content active">
-    <div class="post">
-      <strong>Universe Update:</strong> Scientists discover a new exoplanet.
-      <img src="https://source.unsplash.com/featured/?planet" alt="Exoplanet discovery">
-    </div>
-    <div class="post">
-      <strong>Weather Tip:</strong> It's going to be a chilly week, dress warm!
-      <img src="https://source.unsplash.com/featured/?weather" alt="Weather post">
-    </div>
-    <div class="post">
-      <strong>App News:</strong> New features launched in UniverseApp.
-      <img src="https://source.unsplash.com/featured/?technology" alt="App update">
-    </div>
+  <div class="post-feed" id="feed">
+    <!-- Content populated dynamically -->
   </div>
 
-  <div id="following" class="tab-content">
-    <div class="post">
-      <strong>@AstroJohn:</strong> Just returned from a rocket test—awesome results!
-      <img src="https://source.unsplash.com/featured/?rocket" alt="Rocket post">
-    </div>
-    <div class="post">
-      <strong>@SpaceLover:</strong> Favorite nebula of the month.
-      <img src="https://source.unsplash.com/featured/?nebula" alt="Nebula post">
-    </div>
-    <div class="post">
-      <strong>@TechGuru:</strong> Explaining black holes in 60 seconds.
-      <img src="https://source.unsplash.com/featured/?blackhole" alt="Black hole post">
-    </div>
-  </div>
-
-  <div id="trending" class="tab-content">
-    <div class="post">
-      <strong>#GalacticFashion:</strong> New cosmic clothing line goes viral.
-      <img src="https://source.unsplash.com/featured/?fashion" alt="Fashion trend">
-    </div>
-    <div class="post">
-      <strong>#SolarEclipse:</strong> Don't miss the spectacular eclipse tonight!
-      <img src="https://source.unsplash.com/featured/?eclipse" alt="Eclipse post">
-    </div>
-    <div class="post">
-      <strong>#SpaceFood:</strong> Would you eat this alien snack?
-      <img src="https://source.unsplash.com/featured/?food" alt="Alien food post">
-    </div>
-  </div>
-
-  <div class="bottom-menu">
-    <div class="menu-item" onclick="location.href='home.html'"><i class="material-icons">home</i>Home</div>
-    <div class="menu-item" onclick="location.href='explore.html'"><i class="material-icons">explore</i>Explore</div>
-    <div class="menu-item" onclick="location.href='messages.html'"><i class="material-icons">message</i>Messages</div>
-    <div class="menu-item" onclick="location.href='profile.html'"><i class="material-icons">person</i>Profile</div>
-    <div class="menu-item" onclick="location.href='index.html'"><i class="material-icons">logout</i>Logout</div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="location.href='home.html'"><i class="fas fa-home"></i><br>Home</div>
+    <div class="nav-item" onclick="location.href='explore.html'"><i class="fas fa-compass"></i><br>Explore</div>
+    <div class="nav-item" onclick="location.href='messages.html'"><i class="fas fa-envelope"></i><br>Messages</div>
+    <div class="nav-item" onclick="location.href='profile.html'"><i class="fas fa-user"></i><br>Profile</div>
+    <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-sign-out-alt"></i><br>Logout</div>
   </div>
 
   <script>
-    function showTab(id) {
-      document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
+    const posts = {
+      update: [
+        { title: "Welcome to UniverseApp!", content: "Admin posted: UniverseApp is live today!", image: "https://via.placeholder.com/600x300?text=Launch" },
+        { title: "New Feature", content: "Admin: We've added user search.", image: "https://via.placeholder.com/600x300?text=Update" },
+        { title: "Maintenance", content: "Admin: Scheduled maintenance on Friday.", image: "https://via.placeholder.com/600x300?text=Maintenance" }
+      ],
+      activity: [
+        { title: "User123 liked your post", content: "Your story is gaining traction!", image: "https://via.placeholder.com/600x300?text=Liked" },
+        { title: "User456 followed you", content: "You have a new follower.", image: "https://via.placeholder.com/600x300?text=Follow" },
+        { title: "User789 shared your post", content: "Nice work getting shared!", image: "https://via.placeholder.com/600x300?text=Shared" }
+      ],
+      trending: [
+        { title: "Top Post: Space Photos", content: "Check out these amazing galaxy shots.", image: "https://via.placeholder.com/600x300?text=Galaxy" },
+        { title: "Most Liked: Coding Tips", content: "10 tips that boosted my coding skills.", image: "https://via.placeholder.com/600x300?text=Tips" },
+        { title: "Hot Topic: AI Future", content: "Let's discuss where AI is going.", image: "https://via.placeholder.com/600x300?text=AI+Future" }
+      ]
+    };
+
+    function showTab(tab) {
+      const container = document.getElementById('feed');
+      container.innerHTML = '';
+      posts[tab].forEach(post => {
+        container.innerHTML += `
+          <div class="post">
+            <h3>${post.title}</h3>
+            <p>${post.content}</p>
+            <img src="${post.image}" alt="Post image">
+          </div>
+        `;
       });
-      document.getElementById(id).classList.add('active');
     }
+
+    // Load Daily Update by default
+    showTab('update');
   </script>
 </body>
 </html>
