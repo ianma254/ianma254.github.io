@@ -3,173 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UniverseApp - Home</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <title>UniverseApp Home</title>
   <style>
     body {
       margin: 0;
+      background-color: #0a0f1a; /* Dark blue theme */
       font-family: Arial, sans-serif;
-      background-color: #0d1a2d; /* dark theme */
-      color: white;
+      color: #ffffff;
     }
-
-    .top-bar {
+    header, nav, footer {
+      background-color: #111827;
+      padding: 10px;
+      text-align: center;
+    }
+    .search-bar {
+      margin: 10px auto;
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 10px;
-      position: sticky;
-      top: 0;
-      background-color: #0d1a2d;
-      z-index: 1000;
     }
-
-    .search-box {
-      padding: 8px 16px;
-      border-radius: 25px;
-      border: none;
-      background-color: transparent;
-      border: 1px solid #1f3b5b;
-      color: #007acc;
-      font-size: 16px;
+    .search-bar input {
       width: 50%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
     }
-
-    .nav-tabs {
+    .filters {
       display: flex;
       justify-content: center;
       gap: 20px;
-      padding: 10px;
-      background-color: #0d1a2d;
-      border-bottom: 1px solid #1f3b5b;
-    }
-
-    .tab {
-      padding: 8px 16px;
-      border-radius: 20px;
-      background-color: #1f3b5b;
-      color: #007acc;
-      cursor: pointer;
-      transition: 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .tab:hover {
-      background-color: #003300;
-      color: #00ff99;
-    }
-
-    .post-feed {
-      padding: 20px;
-      max-width: 750px;
-      margin: auto;
-    }
-
-    .post {
-      margin-bottom: 20px;
-      border-bottom: 1px solid #1f3b5b;
-      padding-bottom: 20px;
-    }
-
-    .post h3 {
-      font-size: 22px;
-    }
-
-    .post p {
-      font-size: 18px;
-      max-width: 75%;
-      word-wrap: break-word;
-    }
-
-    .post img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      background-color: #0d1a2d;
-      border-top: 1px solid #1f3b5b;
       padding: 10px 0;
     }
-
-    .nav-item {
-      text-align: center;
-      color: #007acc;
+    .filters div {
+      color: #3b82f6;
       cursor: pointer;
-      transition: 0.3s;
+      position: relative;
     }
-
+    .filters div:hover {
+      color: #10b981;
+    }
+    .filters div::after {
+      content: '';
+      display: block;
+      margin: auto;
+      height: 4px;
+      width: 0;
+      background: #10b981;
+      transition: width .3s ease;
+    }
+    .filters div:hover::after {
+      width: 100%;
+    }
+    .post-container {
+      width: 80%;
+      margin: 20px auto;
+    }
+    .post {
+      background: transparent;
+      border-bottom: 1px solid #2d3748;
+      padding: 15px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      word-wrap: break-word;
+    }
+    .post img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+    footer nav {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .nav-item {
+      color: #3b82f6;
+      cursor: pointer;
+    }
     .nav-item:hover {
-      color: #00ff99;
+      color: #10b981;
     }
   </style>
 </head>
 <body>
-  <div class="top-bar">
-    <input type="text" class="search-box" placeholder="Search posts or users" />
+  <header>
+    <h2>UniverseApp</h2>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Search users or posts..." />
   </div>
 
-  <div class="nav-tabs">
-    <div class="tab" onclick="showTab('update')"><i class="fas fa-bolt"></i> Daily Update</div>
-    <div class="tab" onclick="showTab('activity')"><i class="fas fa-user-friends"></i> Following</div>
-    <div class="tab" onclick="showTab('trending')"><i class="fas fa-fire"></i> Trending</div>
+  <div class="filters">
+    <div onclick="switchCategory('daily')">Daily Update</div>
+    <div onclick="switchCategory('following')">Activities by Following</div>
+    <div onclick="switchCategory('trending')">What's Trending</div>
   </div>
 
-  <div class="post-feed" id="feed">
-    <!-- Content populated dynamically -->
-  </div>
+  <div id="postArea" class="post-container"></div>
 
-  <div class="bottom-nav">
-    <div class="nav-item" onclick="location.href='home.html'"><i class="fas fa-home"></i><br>Home</div>
-    <div class="nav-item" onclick="location.href='explore.html'"><i class="fas fa-compass"></i><br>Explore</div>
-    <div class="nav-item" onclick="location.href='messages.html'"><i class="fas fa-envelope"></i><br>Messages</div>
-    <div class="nav-item" onclick="location.href='profile.html'"><i class="fas fa-user"></i><br>Profile</div>
-    <div class="nav-item" onclick="location.href='index.html'"><i class="fas fa-sign-out-alt"></i><br>Logout</div>
-  </div>
+  <footer>
+    <nav>
+      <div class="nav-item" onclick="location.href='home.html'">Home</div>
+      <div class="nav-item" onclick="location.href='explore.html'">Explore</div>
+      <div class="nav-item" onclick="location.href='messages.html'">Messages</div>
+      <div class="nav-item" onclick="location.href='profile.html'">Profile</div>
+      <div class="nav-item" onclick="location.href='index.html'">Log Out</div>
+    </nav>
+  </footer>
 
   <script>
-    const posts = {
-      update: [
-        { title: "Welcome to UniverseApp!", content: "Admin posted: UniverseApp is live today!", image: "https://via.placeholder.com/600x300?text=Launch" },
-        { title: "New Feature", content: "Admin: We've added user search.", image: "https://via.placeholder.com/600x300?text=Update" },
-        { title: "Maintenance", content: "Admin: Scheduled maintenance on Friday.", image: "https://via.placeholder.com/600x300?text=Maintenance" }
-      ],
-      activity: [
-        { title: "User123 liked your post", content: "Your story is gaining traction!", image: "https://via.placeholder.com/600x300?text=Liked" },
-        { title: "User456 followed you", content: "You have a new follower.", image: "https://via.placeholder.com/600x300?text=Follow" },
-        { title: "User789 shared your post", content: "Nice work getting shared!", image: "https://via.placeholder.com/600x300?text=Shared" }
-      ],
-      trending: [
-        { title: "Top Post: Space Photos", content: "Check out these amazing galaxy shots.", image: "https://via.placeholder.com/600x300?text=Galaxy" },
-        { title: "Most Liked: Coding Tips", content: "10 tips that boosted my coding skills.", image: "https://via.placeholder.com/600x300?text=Tips" },
-        { title: "Hot Topic: AI Future", content: "Let's discuss where AI is going.", image: "https://via.placeholder.com/600x300?text=AI+Future" }
-      ]
-    };
+    const postArea = document.getElementById('postArea');
+    let currentCategory = 'daily';
 
-    function showTab(tab) {
-      const container = document.getElementById('feed');
-      container.innerHTML = '';
-      posts[tab].forEach(post => {
-        container.innerHTML += `
-          <div class="post">
-            <h3>${post.title}</h3>
-            <p>${post.content}</p>
-            <img src="${post.image}" alt="Post image">
-          </div>
-        `;
-      });
+    function generatePost(category, index) {
+      return `
+        <div class="post">
+          <strong>${category.toUpperCase()} POST #${index + 1}</strong>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Post ${index + 1} by ${category}</p>
+          <img src="https://picsum.photos/seed/${category + index}/400/200" alt="Post image" />
+        </div>
+      `;
     }
 
-    // Load Daily Update by default
-    showTab('update');
+    function renderPosts(category) {
+      let postsHTML = '';
+      for (let i = 0; i < 20; i++) {
+        postsHTML += generatePost(category, i);
+      }
+      postArea.innerHTML = postsHTML;
+    }
+
+    function switchCategory(category) {
+      currentCategory = category;
+      renderPosts(category);
+    }
+
+    // Initial load
+    renderPosts(currentCategory);
   </script>
 </body>
 </html>
