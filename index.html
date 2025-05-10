@@ -109,14 +109,24 @@
     let chasing = false;
     let inBlueRegion = false;
 
-    function positionLoginButtonInitially() {
+    function getLoginBoxCenterPosition() {
       const containerRect = loginBox.getBoundingClientRect();
-      loginBtn.style.left = `${containerRect.left + containerRect.width / 2 - 30}px`;
-      loginBtn.style.top = `${containerRect.bottom - 80}px`;
+      return {
+        left: containerRect.left + containerRect.width / 2 - 30,
+        top: containerRect.top + containerRect.height - 30,
+      };
+    }
+
+    function positionLoginButtonInitially() {
+      const pos = getLoginBoxCenterPosition();
+      loginBtn.style.left = `${pos.left}px`;
+      loginBtn.style.top = `${pos.top}px`;
     }
 
     window.onload = positionLoginButtonInitially;
-    window.onresize = positionLoginButtonInitially;
+    window.onresize = () => {
+      if (!chasing) positionLoginButtonInitially();
+    };
 
     function checkInputs() {
       const filled = username.value.trim() && password.value.trim();
@@ -134,13 +144,14 @@
     }
 
     function returnButtonToWhiteArea() {
-      const containerRect = loginBox.getBoundingClientRect();
-      loginBtn.style.left = `${containerRect.left + containerRect.width / 2 - 30}px`;
-      loginBtn.style.top = `${containerRect.bottom - 80}px`;
+      const pos = getLoginBoxCenterPosition();
+      loginBtn.style.left = `${pos.left}px`;
+      loginBtn.style.top = `${pos.top}px`;
       loginBtn.classList.remove('chasing', 'flicker');
       loginBtn.style.backgroundColor = 'purple';
       emoji.textContent = '🙂';
       inBlueRegion = false;
+      chasing = false;
     }
 
     username.addEventListener('input', checkInputs);
@@ -174,7 +185,6 @@
         loginBtn.style.left = `${randX}px`;
         loginBtn.style.top = `${randY}px`;
 
-        // Check if in blue region
         const containerRect = loginBox.getBoundingClientRect();
         const btnCenterX = randX + loginBtn.offsetWidth / 2;
         const btnCenterY = randY + loginBtn.offsetHeight / 2;
