@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hex - Profile</title>
+</head>
+<body>
+  <div class="container">
+    <nav class="sidebar">
+      <h2>Hex</h2>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="search.html">Explore</a></li>
+        <li><a href="chat.html">Messages</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li onclick="logout()">Logout</li>
+      </ul>
+    </nav>
+
+    <main class="profile">
+      <h2>Your Profile</h2>
+      <div class="profile-info">
+        <p>Username: <strong id="profileUsername">loading...</strong></p>
+        <p>Bio: <span id="profileBio">This is the user's bio.</span></p>
+      </div>
+      <div id="userPosts" class="user-posts"></div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
