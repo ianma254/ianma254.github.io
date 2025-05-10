@@ -52,17 +52,20 @@
     }
 
     #loginBtn {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       background-color: purple;
       color: white;
       border: none;
-      border-radius: 6px;
-      font-size: 0.8rem;
+      border-radius: 10px;
+      font-size: 0.7rem;
       cursor: pointer;
       position: absolute;
-      transition: all 0.2s ease;
+      top: 80%;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 2;
+      transition: all 0.2s ease;
     }
 
     #loginBtn.enabled:hover {
@@ -71,6 +74,19 @@
 
     #loginBtn.chasing {
       background-color: red !important;
+    }
+
+    #loginBtn.flicker {
+      animation: flicker 0.2s infinite alternate;
+    }
+
+    @keyframes flicker {
+      from {
+        box-shadow: 0 0 10px red;
+      }
+      to {
+        box-shadow: 0 0 30px orange;
+      }
     }
   </style>
 </head>
@@ -93,33 +109,43 @@
     const emoji = document.getElementById('emoji');
 
     let chasing = false;
+    let inBlueRegion = false;
 
     function checkInputs() {
       const filled = username.value.trim() && password.value.trim();
       if (filled) {
         loginBtn.classList.add('enabled');
-        loginBtn.classList.remove('chasing');
+        loginBtn.classList.remove('chasing', 'flicker');
         loginBtn.style.backgroundColor = 'purple';
         emoji.textContent = '🙂';
+        return true;
       } else {
         loginBtn.classList.remove('enabled');
+        return false;
       }
     }
 
     username.addEventListener('input', checkInputs);
     password.addEventListener('input', checkInputs);
 
-    username.addEventListener('focus', () => emoji.textContent = '🙂');
-    password.addEventListener('focus', () => emoji.textContent = '🙂');
+    username.addEventListener('focus', () => {
+      emoji.textContent = '🙂';
+      returnButtonToWhiteArea();
+    });
+
+    password.addEventListener('focus', () => {
+      emoji.textContent = '🙂';
+      returnButtonToWhiteArea();
+    });
 
     function moveButtonAway(event) {
-      const filled = username.value.trim() && password.value.trim();
+      const filled = checkInputs();
       if (filled) return;
 
       const btnRect = loginBtn.getBoundingClientRect();
       const distance = Math.hypot(event.clientX - btnRect.left, event.clientY - btnRect.top);
 
-      if (distance < 150) {
+      if (distance < 180) {
         chasing = true;
         loginBtn.classList.add('chasing');
         emoji.textContent = '😠';
@@ -131,12 +157,44 @@
 
         loginBtn.style.left = `${randX}px`;
         loginBtn.style.top = `${randY}px`;
+
+        // Check if button is outside white region (in blue)
+        const container = document.querySelector('.login-container');
+        const containerRect = container.getBoundingClientRect();
+        const btnCenterX = randX + loginBtn.offsetWidth / 2;
+        const btnCenterY = randY + loginBtn.offsetHeight / 2;
+
+        inBlueRegion = (
+          btnCenterX < containerRect.left ||
+          btnCenterX > containerRect.right ||
+          btnCenterY < containerRect.top ||
+          btnCenterY > containerRect.bottom
+        );
+
+        if (!inBlueRegion) {
+          loginBtn.classList.add('flicker');
+        } else {
+          loginBtn.classList.remove('flicker');
+        }
       }
+    }
+
+    function returnButtonToWhiteArea() {
+      const container = document.querySelector('.login-container');
+      const containerRect = container.getBoundingClientRect();
+
+      loginBtn.style.left = `${containerRect.left + containerRect.width / 2 - 30}px`;
+      loginBtn.style.top = `${containerRect.bottom - 80}px`;
+
+      loginBtn.classList.remove('chasing', 'flicker');
+      loginBtn.style.backgroundColor = 'purple';
+      emoji.textContent = '🙂';
+      inBlueRegion = false;
     }
 
     function handleLogin(e) {
       e.preventDefault();
-      const filled = username.value.trim() && password.value.trim();
+      const filled = checkInputs();
       if (filled) {
         window.location.href = 'home.html';
       }
@@ -144,9 +202,7 @@
 
     document.addEventListener('mousemove', moveButtonAway);
     loginBtn.addEventListener('mouseleave', () => {
-      if (!username.value.trim() || !password.value.trim()) {
-        loginBtn.classList.remove('chasing');
-        loginBtn.style.backgroundColor = 'purple';
+      if (!checkInputs()) {
         emoji.textContent = '🙂';
       }
     });
