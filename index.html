@@ -2,217 +2,135 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Universe App - Login</title>
+  <title>Universe App Login</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #1DA1F2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
-      overflow: hidden;
-      position: relative;
     }
-
-    .login-container {
+    .container {
       background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 400px;
-      margin: 8% auto;
-      position: relative;
+      padding: 40px;
+      border-radius: 10px;
       text-align: center;
-      z-index: 1;
+      width: 300px;
+      position: relative;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
     }
-
-    h1 {
-      margin-bottom: 0.5rem;
-      color: #1DA1F2;
+    h2 {
+      margin-bottom: 20px;
     }
-
-    #emoji {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      transition: 0.3s ease;
-    }
-
     input {
-      display: block;
-      width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
+      border-radius: 5px;
     }
-
     #loginBtn {
       width: 60px;
       height: 60px;
       background-color: purple;
       color: white;
       border: none;
-      border-radius: 10px;
-      font-size: 0.7rem;
+      border-radius: 50%;
       cursor: pointer;
       position: absolute;
-      z-index: 2;
-      transition: all 0.2s ease;
+      left: 120px;
+      top: 220px;
+      transition: all 0.3s ease;
     }
-
-    #loginBtn.enabled:hover {
-      box-shadow: 0 0 8px rgba(128, 0, 128, 0.5);
+    #loginBtn:hover {
+      background-color: red;
     }
-
-    #loginBtn.chasing {
-      background-color: red !important;
+    .flicker {
+      animation: flicker 0.3s infinite alternate;
     }
-
-    #loginBtn.flicker {
-      animation: flicker 0.2s infinite alternate;
-    }
-
     @keyframes flicker {
-      from {
-        box-shadow: 0 0 10px red;
-      }
-      to {
-        box-shadow: 0 0 30px orange;
-      }
+      from { opacity: 1; }
+      to { opacity: 0.5; }
+    }
+    .emoji {
+      font-size: 24px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="login-container" id="loginBox">
-    <h1>Universe App</h1>
-    <div id="emoji">🙂</div>
-    <form onsubmit="handleLogin(event)">
-      <input type="text" id="username" placeholder="Username" required />
-      <input type="password" id="password" placeholder="Password" required />
-    </form>
+  <div class="container" id="loginContainer">
+    <div class="emoji" id="emoji">🙂</div>
+    <h2>Login to Universe</h2>
+    <input type="text" placeholder="Username" id="username" />
+    <input type="password" placeholder="Password" id="password" />
+    <button id="loginBtn">Login</button>
   </div>
 
-  <button id="loginBtn">Login</button>
-
   <script>
+    const btn = document.getElementById('loginBtn');
+    const container = document.getElementById('loginContainer');
     const username = document.getElementById('username');
     const password = document.getElementById('password');
-    const loginBtn = document.getElementById('loginBtn');
     const emoji = document.getElementById('emoji');
-    const loginBox = document.getElementById('loginBox');
 
-    let chasing = false;
-    let inBlueRegion = false;
+    let hovering = false;
+    let filled = false;
 
-    function getLoginBoxCenterPosition() {
-      const containerRect = loginBox.getBoundingClientRect();
-      return {
-        left: containerRect.left + containerRect.width / 2 - 30,
-        top: containerRect.top + containerRect.height - 30,
-      };
+    function isInputFilled() {
+      return username.value.trim() !== "" && password.value.trim() !== "";
     }
 
-    function positionLoginButtonInitially() {
-      const pos = getLoginBoxCenterPosition();
-      loginBtn.style.left = `${pos.left}px`;
-      loginBtn.style.top = `${pos.top}px`;
+    function moveButton() {
+      const containerRect = container.getBoundingClientRect();
+      const btnWidth = btn.offsetWidth;
+      const btnHeight = btn.offsetHeight;
+      const maxLeft = containerRect.width - btnWidth;
+      const maxTop = containerRect.height - btnHeight;
+      const newLeft = Math.floor(Math.random() * maxLeft);
+      const newTop = Math.floor(Math.random() * maxTop);
+
+      btn.style.left = `${newLeft}px`;
+      btn.style.top = `${newTop}px`;
     }
 
-    window.onload = positionLoginButtonInitially;
-    window.onresize = () => {
-      if (!chasing) positionLoginButtonInitially();
-    };
-
-    function checkInputs() {
-      const filled = username.value.trim() && password.value.trim();
-      if (filled) {
-        loginBtn.classList.add('enabled');
-        loginBtn.classList.remove('chasing', 'flicker');
-        loginBtn.style.backgroundColor = 'purple';
-        emoji.textContent = '🙂';
-        returnButtonToWhiteArea();
-        return true;
-      } else {
-        loginBtn.classList.remove('enabled');
-        return false;
+    btn.addEventListener('mouseover', () => {
+      if (!isInputFilled()) {
+        btn.classList.add("flicker");
+        btn.style.backgroundColor = "red";
+        emoji.textContent = "😠";
+        moveButton();
       }
-    }
-
-    function returnButtonToWhiteArea() {
-      const pos = getLoginBoxCenterPosition();
-      loginBtn.style.left = `${pos.left}px`;
-      loginBtn.style.top = `${pos.top}px`;
-      loginBtn.classList.remove('chasing', 'flicker');
-      loginBtn.style.backgroundColor = 'purple';
-      emoji.textContent = '🙂';
-      inBlueRegion = false;
-      chasing = false;
-    }
-
-    username.addEventListener('input', checkInputs);
-    password.addEventListener('input', checkInputs);
-
-    username.addEventListener('focus', () => {
-      checkInputs();
     });
 
-    password.addEventListener('focus', () => {
-      checkInputs();
-    });
-
-    function moveButtonAway(event) {
-      const filled = checkInputs();
-      if (filled) return;
-
-      const btnRect = loginBtn.getBoundingClientRect();
-      const distance = Math.hypot(event.clientX - btnRect.left, event.clientY - btnRect.top);
-
-      if (distance < 180) {
-        chasing = true;
-        loginBtn.classList.add('chasing');
-        emoji.textContent = '😠';
-
-        const maxX = window.innerWidth - loginBtn.offsetWidth;
-        const maxY = window.innerHeight - loginBtn.offsetHeight;
-        const randX = Math.random() * maxX;
-        const randY = Math.random() * maxY;
-
-        loginBtn.style.left = `${randX}px`;
-        loginBtn.style.top = `${randY}px`;
-
-        const containerRect = loginBox.getBoundingClientRect();
-        const btnCenterX = randX + loginBtn.offsetWidth / 2;
-        const btnCenterY = randY + loginBtn.offsetHeight / 2;
-
-        inBlueRegion = (
-          btnCenterX < containerRect.left ||
-          btnCenterX > containerRect.right ||
-          btnCenterY < containerRect.top ||
-          btnCenterY > containerRect.bottom
-        );
-
-        if (!inBlueRegion) {
-          loginBtn.classList.add('flicker');
-        } else {
-          loginBtn.classList.remove('flicker');
-        }
-      }
-    }
-
-    function handleLogin(e) {
-      e.preventDefault();
-      const filled = checkInputs();
-      if (filled) {
+    btn.addEventListener('click', () => {
+      if (isInputFilled()) {
         window.location.href = 'home.html';
       }
-    }
+    });
 
-    document.addEventListener('mousemove', moveButtonAway);
+    username.addEventListener('input', () => {
+      if (isInputFilled()) {
+        resetButton();
+      }
+    });
+
+    password.addEventListener('input', () => {
+      if (isInputFilled()) {
+        resetButton();
+      }
+    });
+
+    function resetButton() {
+      btn.classList.remove("flicker");
+      btn.style.backgroundColor = "purple";
+      btn.style.left = "120px";
+      btn.style.top = "220px";
+      emoji.textContent = "🙂";
+    }
   </script>
 </body>
 </html>
