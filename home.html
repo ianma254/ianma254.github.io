@@ -1,156 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UniverseApp - Home</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <title>Universe App - Home</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background-color: #0d1117;
-      color: #e6edf3;
       font-family: Arial, sans-serif;
+      background-color: #0e1a2b;
+      color: #ffffff;
     }
-
-    header {
+    .top-bar {
       text-align: center;
-      padding: 10px;
+      padding: 1em;
     }
-
-    #search-bar {
-      background: transparent;
-      border: 2px solid #1f6feb;
-      padding: 8px 12px;
-      color: #e6edf3;
-      font-size: 16px;
-      border-radius: 20px;
+    .search-bar {
       width: 60%;
-      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: transparent;
+      border: 2px solid #1f3b5a;
+      color: #add8e6;
+      text-align: center;
     }
-
-    .nav-tabs {
+    .tabs {
       display: flex;
-      justify-content: center;
-      margin: 20px 0;
-      gap: 20px;
+      justify-content: space-around;
+      margin-top: 1em;
+      border-bottom: 1px solid #2f4f6f;
     }
-
     .tab {
-      padding: 8px 15px;
-      background: #161b22;
-      border-radius: 20px;
+      padding: 10px 20px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      color: #3399ff;
+      position: relative;
     }
-
     .tab:hover {
-      box-shadow: 0 0 10px #58a6ff;
-      background-color: #1f6feb;
+      color: #00ffcc;
+      text-shadow: 0 0 8px #00ffcc;
     }
-
-    .posts-container {
-      max-width: 750px;
-      margin: auto;
+    .tab-content {
+      display: none;
+      padding: 1em;
     }
-
+    .tab-content.active {
+      display: block;
+    }
     .post {
-      background-color: #0d1117;
-      border-bottom: 1px solid #21262d;
-      padding: 15px;
+      margin-bottom: 1.5em;
+      max-width: 80%;
       word-wrap: break-word;
+      font-size: 18px;
     }
-
     .post img {
-      width: 100%;
+      max-width: 100%;
+      border-radius: 12px;
       margin-top: 10px;
-      border-radius: 10px;
     }
-
-    footer {
+    .bottom-menu {
       position: fixed;
       bottom: 0;
       width: 100%;
-      background: #161b22;
+      background-color: #0a1420;
       display: flex;
       justify-content: space-around;
-      padding: 10px 0;
-      border-top: 1px solid #21262d;
+      border-top: 1px solid #2f4f6f;
     }
-
-    .footer-link {
+    .menu-item {
+      padding: 10px;
       text-align: center;
-      color: #58a6ff;
-      text-decoration: none;
+      color: #3399ff;
+      cursor: pointer;
     }
-
-    .footer-link:hover {
-      color: #1f6feb;
-    }
-
-    .footer-link i {
+    .menu-item i {
       display: block;
-      font-size: 18px;
-      margin-bottom: 3px;
+      font-size: 20px;
+    }
+    .menu-item:hover {
+      color: #00ffcc;
+      text-shadow: 0 0 6px #00ffcc;
     }
   </style>
 </head>
 <body>
-  <header>
-    <input type="text" id="search-bar" placeholder="Search..." />
-  </header>
-
-  <div class="nav-tabs">
-    <div class="tab" onclick="showPosts('daily')">Daily Update</div>
-    <div class="tab" onclick="showPosts('following')">Activities by Your Following</div>
-    <div class="tab" onclick="showPosts('trending')">What's Trending</div>
+  <div class="top-bar">
+    <input type="text" placeholder="Search..." class="search-bar">
   </div>
 
-  <div id="posts" class="posts-container"></div>
+  <div class="tabs">
+    <div class="tab" onclick="showTab('daily')">Daily Update</div>
+    <div class="tab" onclick="showTab('following')">Activities by Following</div>
+    <div class="tab" onclick="showTab('trending')">What's Trending</div>
+  </div>
 
-  <footer>
-    <a href="home.html" class="footer-link"><i class="fas fa-home"></i>Home</a>
-    <a href="explore.html" class="footer-link"><i class="fas fa-hashtag"></i>Explore</a>
-    <a href="messages.html" class="footer-link"><i class="fas fa-envelope"></i>Messages</a>
-    <a href="profile.html" class="footer-link"><i class="fas fa-user"></i>Profile</a>
-    <a href="index.html" class="footer-link"><i class="fas fa-sign-out-alt"></i>Log Out</a>
-  </footer>
+  <div id="daily" class="tab-content active">
+    <div class="post">
+      <strong>Universe Update:</strong> Scientists discover a new exoplanet.
+      <img src="https://source.unsplash.com/featured/?planet" alt="Exoplanet discovery">
+    </div>
+    <div class="post">
+      <strong>Weather Tip:</strong> It's going to be a chilly week, dress warm!
+      <img src="https://source.unsplash.com/featured/?weather" alt="Weather post">
+    </div>
+    <div class="post">
+      <strong>App News:</strong> New features launched in UniverseApp.
+      <img src="https://source.unsplash.com/featured/?technology" alt="App update">
+    </div>
+  </div>
+
+  <div id="following" class="tab-content">
+    <div class="post">
+      <strong>@AstroJohn:</strong> Just returned from a rocket test—awesome results!
+      <img src="https://source.unsplash.com/featured/?rocket" alt="Rocket post">
+    </div>
+    <div class="post">
+      <strong>@SpaceLover:</strong> Favorite nebula of the month.
+      <img src="https://source.unsplash.com/featured/?nebula" alt="Nebula post">
+    </div>
+    <div class="post">
+      <strong>@TechGuru:</strong> Explaining black holes in 60 seconds.
+      <img src="https://source.unsplash.com/featured/?blackhole" alt="Black hole post">
+    </div>
+  </div>
+
+  <div id="trending" class="tab-content">
+    <div class="post">
+      <strong>#GalacticFashion:</strong> New cosmic clothing line goes viral.
+      <img src="https://source.unsplash.com/featured/?fashion" alt="Fashion trend">
+    </div>
+    <div class="post">
+      <strong>#SolarEclipse:</strong> Don't miss the spectacular eclipse tonight!
+      <img src="https://source.unsplash.com/featured/?eclipse" alt="Eclipse post">
+    </div>
+    <div class="post">
+      <strong>#SpaceFood:</strong> Would you eat this alien snack?
+      <img src="https://source.unsplash.com/featured/?food" alt="Alien food post">
+    </div>
+  </div>
+
+  <div class="bottom-menu">
+    <div class="menu-item" onclick="location.href='home.html'"><i class="material-icons">home</i>Home</div>
+    <div class="menu-item" onclick="location.href='explore.html'"><i class="material-icons">explore</i>Explore</div>
+    <div class="menu-item" onclick="location.href='messages.html'"><i class="material-icons">message</i>Messages</div>
+    <div class="menu-item" onclick="location.href='profile.html'"><i class="material-icons">person</i>Profile</div>
+    <div class="menu-item" onclick="location.href='index.html'"><i class="material-icons">logout</i>Logout</div>
+  </div>
 
   <script>
-    const postData = {
-      daily: [
-        { text: "Stay focused and hydrated today!", image: "https://placekitten.com/600/300" },
-        { text: "Here's your morning quote: Believe you can and you're halfway there.", image: "https://placebear.com/600/300" },
-        { text: "Daily Tip: A 10-minute walk boosts your creativity!", image: "https://picsum.photos/600/300?random=1" }
-      ],
-      following: [
-        { text: "Alex liked your post!", image: "https://picsum.photos/600/300?random=2" },
-        { text: "Sarah commented: 'Great post!'…", image: "https://picsum.photos/600/300?random=3" },
-        { text: "Tom followed you.", image: "https://picsum.photos/600/300?random=4" }
-      ],
-      trending: [
-        { text: "#UniverseApp is now trending worldwide!", image: "https://picsum.photos/600/300?random=5" },
-        { text: "The latest update just dropped. Check it out!", image: "https://picsum.photos/600/300?random=6" },
-        { text: "Breaking: Tech innovation shaking up the social media world!", image: "https://picsum.photos/600/300?random=7" }
-      ]
-    };
-
-    function showPosts(type) {
-      const container = document.getElementById('posts');
-      container.innerHTML = '';
-      postData[type].forEach(post => {
-        container.innerHTML += `
-          <div class="post">
-            <p>${post.text}</p>
-            <img src="${post.image}" alt="Post Image">
-          </div>
-        `;
+    function showTab(id) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
       });
+      document.getElementById(id).classList.add('active');
     }
-
-    // Load daily posts by default
-    showPosts('daily');
   </script>
 </body>
 </html>
