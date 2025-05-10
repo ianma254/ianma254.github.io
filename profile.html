@@ -1,109 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Profile</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body {
       margin: 0;
-      background-color: #0e0f13;
-      color: #fff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f0f1a;
+      color: white;
     }
     .cover-photo {
-      background-image: url('media/cover.jpg');
-      background-size: cover;
-      background-position: center;
+      width: 100%;
       height: 200px;
+      background: url('cover-placeholder.jpg') center/cover no-repeat;
       position: relative;
     }
-    .profile-photo {
+    .profile-pic {
       width: 120px;
       height: 120px;
       border-radius: 50%;
-      border: 4px solid #0e0f13;
+      border: 4px solid white;
       position: absolute;
+      left: 50%;
       bottom: -60px;
-      left: 20px;
-      background-image: url('media/profile.jpg');
-      background-size: cover;
-      background-position: center;
+      transform: translateX(-50%);
+      background: url('profile-placeholder.jpg') center/cover no-repeat;
     }
-    .profile-info {
-      margin-top: 80px;
-      padding: 0 20px;
-    }
-    .profile-info h1 {
-      margin: 0;
-      font-size: 26px;
-    }
-    .settings-button {
-      float: right;
-      margin-top: -40px;
-      margin-right: 20px;
-      background-color: #1c2333;
-      border: none;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-    }
-    .settings-button:hover {
-      background-color: #00cc99;
-    }
-    .about-section {
-      margin: 30px 20px;
-      background-color: #1a1b22;
-      padding: 20px;
-      border-radius: 10px;
-    }
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background-color: #1c2333;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
-    }
-    .bottom-nav a {
-      color: #00aaff;
-      text-decoration: none;
+    .user-info {
       text-align: center;
+      margin-top: 70px;
+    }
+    .user-info h2 {
+      margin: 10px 0 5px;
+      font-size: 24px;
+    }
+    .user-info p {
+      margin: 0;
       font-size: 14px;
+      color: #aaa;
     }
-    .bottom-nav a:hover {
-      color: #00cc99;
-    }
-    .bottom-nav i {
-      display: block;
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 20px 0;
       font-size: 18px;
+      font-weight: bold;
+    }
+    .main {
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+    .media-section {
+      flex: 2;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+    }
+    .media-section img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .connections-section {
+      flex: 1;
+      background: #161622;
+      padding: 15px;
+      border-radius: 10px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .connection {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .connection img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .connection-name {
+      font-size: 14px;
+      color: #ddd;
     }
   </style>
 </head>
 <body>
+
   <div class="cover-photo">
-    <div class="profile-photo"></div>
-  </div>
-  <div class="profile-info">
-    <h1>Username</h1>
-    <button class="settings-button">Edit Profile</button>
+    <div class="profile-pic"></div>
   </div>
 
-  <div class="about-section">
-    <h2>About</h2>
-    <p>This is a sample profile bio. You can add your details here.</p>
+  <div class="user-info">
+    <h2>John Doe</h2>
+    <p>Bachelor of Computer Science - University of Nairobi</p>
   </div>
 
-  <div class="bottom-nav">
-    <a href="home.html"><i class="fas fa-home"></i>Home</a>
-    <a href="explore.html"><i class="fas fa-hashtag"></i>Explore</a>
-    <a href="messages.html"><i class="fas fa-envelope"></i>Messages</a>
-    <a href="profile.html"><i class="fas fa-user"></i>Profile</a>
-    <a href="index.html"><i class="fas fa-sign-out-alt"></i>Logout</a>
+  <div class="stats">
+    <div>Followers: <span>2.4K</span></div>
+    <div>Following: <span>1.1K</span></div>
   </div>
+
+  <div class="main">
+    <div class="media-section">
+      <img src="media1.jpg" alt="Post 1">
+      <img src="media2.jpg" alt="Post 2">
+      <img src="media3.jpg" alt="Post 3">
+      <img src="media4.jpg" alt="Post 4">
+    </div>
+    <div class="connections-section">
+      <h3 style="color: white;">Connections</h3>
+      <div class="connection">
+        <img src="user1.jpg" alt="User 1">
+        <div class="connection-name">Alice M.</div>
+      </div>
+      <div class="connection">
+        <img src="user2.jpg" alt="User 2">
+        <div class="connection-name">Brian T.</div>
+      </div>
+      <div class="connection">
+        <img src="user3.jpg" alt="User 3">
+        <div class="connection-name">Carol N.</div>
+      </div>
+      <div class="connection">
+        <img src="user4.jpg" alt="User 4">
+        <div class="connection-name">David W.</div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
