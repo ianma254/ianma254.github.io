@@ -2,175 +2,139 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home - Universe App</title>
   <style>
-    /* Basic styling for the whole page */
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #00b14f; /* M-Pesa Green theme */
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: 100vh;
-    }
-
-    /* Top navigation bar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.7); /* Transparent background */
-    }
-
-    /* Search bar styling */
-    .search-bar {
-      width: 300px;
-      height: 40px;
-      padding: 10px;
-      border-radius: 20px;
-      border: 1px solid #003366; /* Deep blue color */
-      background-color: transparent;
-      color: #003366;
-      font-size: 16px;
-    }
-
-    /* Icons navigation */
-    .nav-icons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
-      padding: 20px 0;
-      width: 100%;
-    }
-
-    .icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      cursor: pointer;
-    }
-
-    .icon-circle {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-color: #003366;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1DA1F2;
       color: white;
       display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .search-container {
+      display: flex;
       justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      margin-bottom: 5px;
+      padding: 15px;
     }
 
-    .icon-name {
+    .search-bar {
+      width: 60%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 0.2);
       color: #003366;
-      font-size: 14px;
+      text-align: center;
     }
 
-    /* Sections beneath the navbar */
-    .sections {
-      width: 90%;
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 10px;
+    }
+
+    .tab {
+      padding: 10px 18px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 0px transparent;
+    }
+
+    .tab:hover {
+      box-shadow: 0 0 12px #ffffff;
+    }
+
+    .posts {
+      flex: 1;
+      padding: 15px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
+      gap: 15px;
     }
 
-    .sections-row {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
-    .section-title {
-      color: #003366;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    /* Pseudo posts */
     .post {
-      width: 100%;
-      background: white;
-      border-radius: 8px;
-      margin-bottom: 10px;
+      background-color: #ffffff;
+      color: #1a1a1a;
+      border-radius: 12px;
       padding: 15px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
 
-    .post-title {
-      font-size: 16px;
+    .post-header {
       font-weight: bold;
-      color: #003366;
+      margin-bottom: 8px;
     }
 
-    .post-body {
+    .post-content {
+      font-size: 15px;
+    }
+
+    .bottom-nav {
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      border-top: 1px solid #ffffff55;
+    }
+
+    .nav-item {
+      text-align: center;
+      color: white;
       font-size: 14px;
-      color: #333;
+      cursor: pointer;
+      padding: 8px;
+      transition: all 0.2s;
+      border-radius: 50%;
+      text-decoration: none;
     }
 
+    .nav-item:hover {
+      background-color: rgba(0, 255, 0, 0.3);
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
-  <!-- Navbar with Search Bar -->
-  <div class="navbar">
-    <input class="search-bar" type="text" placeholder="Search..." />
+
+  <div class="search-container">
+    <input class="search-bar" type="text" placeholder="Search...">
   </div>
 
-  <!-- Icons navigation -->
-  <div class="nav-icons">
-    <div class="icon">
-      <div class="icon-circle">🏠</div>
-      <div class="icon-name">Home</div>
+  <div class="tabs">
+    <div class="tab">Daily Update</div>
+    <div class="tab">Activities by Your Following</div>
+    <div class="tab">What's Trending</div>
+  </div>
+
+  <div class="posts">
+    <div class="post">
+      <div class="post-header">@user1 · 2h</div>
+      <div class="post-content">Welcome to Universe App! This is your first pseudo post. Enjoy exploring!</div>
     </div>
-    <div class="icon">
-      <div class="icon-circle">🔍</div>
-      <div class="icon-name">Explore</div>
+    <div class="post">
+      <div class="post-header">@follower2 · 1h</div>
+      <div class="post-content">Can't believe how smooth the new interface feels. Loving the dark blue!</div>
     </div>
-    <div class="icon">
-      <div class="icon-circle">💬</div>
-      <div class="icon-name">Messages</div>
-    </div>
-    <div class="icon">
-      <div class="icon-circle">👤</div>
-      <div class="icon-name">Profile</div>
-    </div>
-    <div class="icon">
-      <div class="icon-circle">🚪</div>
-      <div class="icon-name">Log Out</div>
+    <div class="post">
+      <div class="post-header">@trendwatch · 30m</div>
+      <div class="post-content">#UniverseApp is trending worldwide. Dive in and see what the hype is about!</div>
     </div>
   </div>
 
-  <!-- Sections: Daily Update, Activities by Your Following, What's Trending -->
-  <div class="sections">
-    <div class="sections-row">
-      <div class="section-title">The Daily Update</div>
-      <div class="section-title">Activities by Your Following</div>
-      <div class="section-title">What's Trending</div>
-    </div>
-
-    <!-- Pseudo posts -->
-    <div class="post">
-      <div class="post-title">Post Title 1</div>
-      <div class="post-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin suscipit felis sit amet metus...</div>
-    </div>
-    <div class="post">
-      <div class="post-title">Post Title 2</div>
-      <div class="post-body">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Integer nec odio...</div>
-    </div>
-    <div class="post">
-      <div class="post-title">Post Title 3</div>
-      <div class="post-body">Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra...</div>
-    </div>
+  <div class="bottom-nav">
+    <a href="home.html" class="nav-item">Home</a>
+    <a href="explore.html" class="nav-item">Explore</a>
+    <a href="messages.html" class="nav-item">Messages</a>
+    <a href="profile.html" class="nav-item">Profile</a>
+    <a href="logout.html" class="nav-item">Log Out</a>
   </div>
 
 </body>
