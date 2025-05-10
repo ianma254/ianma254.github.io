@@ -1,69 +1,308 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #15202b;
-  color: #ffffff;
+/* Global Styles */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-header {
-  background-color: #1da1f2;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f8fa; /* Default light theme background */
+  color: #333;
+}
+
+/* Dark Theme */
+body.dark-theme {
+  background-color: #1e1e2f;
+  color: #f0f0f0;
+}
+
+body.dark-theme a {
+  color: #1DA1F2;
+}
+
+/* Blue Theme */
+body.blue-theme {
+  background-color: #e9f7ff;
+  color: #1DA1F2;
+}
+
+body.blue-theme a {
+  color: #007BFF;
+}
+
+/* Container Layout */
+.container {
   display: flex;
+  min-height: 100vh;
+}
+
+/* Login Page */
+.login-container {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 10px;
+  min-height: 100vh;
+  background: linear-gradient(to right, #1DA1F2, #00B8D4); /* Colorful gradient */
 }
 
-.logo {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
+.login-box {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  width: 350px;
 }
 
-h1 {
-  margin: 0;
-}
-
-.login, .app {
-  max-width: 600px;
-  margin: 50px auto;
+.login-box h1 {
   text-align: center;
+  color: #1DA1F2;
+  margin-bottom: 20px;
 }
 
-input, textarea {
-  width: 80%;
+.login-box input {
+  width: 100%;
   padding: 10px;
-  margin: 10px 0;
-  border: none;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 16px;
 }
 
-button {
-  background-color: #1da1f2;
-  border: none;
-  padding: 10px 20px;
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1DA1F2;
   color: white;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.feed {
-  margin-top: 20px;
+.login-box button:hover {
+  background-color: #1A91DA;
 }
 
-.tweet {
-  background-color: #192734;
-  padding: 15px;
-  margin: 10px;
-  border-radius: 10px;
-  text-align: left;
-}
-
-.hidden {
-  display: none;
-}
-
-footer {
-  text-align: center;
+/* Sidebar */
+nav.sidebar {
+  width: 240px;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  background-color: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+}
+
+nav.sidebar h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+nav.sidebar ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+nav.sidebar ul li {
+  margin-bottom: 15px;
+}
+
+nav.sidebar ul li a {
+  display: block;
+  padding: 10px;
+  color: #1DA1F2;
+  font-size: 18px;
+}
+
+nav.sidebar ul li a:hover {
+  background-color: #f5f8fa;
+  border-radius: 5px;
+}
+
+nav.sidebar ul li:hover {
+  cursor: pointer;
+}
+
+/* Main Feed Section */
+main.main-feed {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Tweet Box */
+main.main-feed .tweet-box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+main.main-feed .tweet-box textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  height: 100px;
+  resize: none;
+}
+
+main.main-feed .tweet-box button {
+  padding: 10px 15px;
+  background-color: #1DA1F2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+main.main-feed .tweet-box button:hover {
+  background-color: #1A91DA;
+}
+
+/* Feed Section */
+.feed {
+  display: flex;
+  flex-direction: column;
+}
+
+.feed .tweet {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.feed .tweet p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Profile Page */
+main.profile {
+  padding: 20px;
+}
+
+.profile-info {
+  margin-bottom: 30px;
+}
+
+.profile-info p {
+  font-size: 18px;
+}
+
+.profile-info strong {
+  color: #1DA1F2;
+}
+
+.user-posts {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-posts .tweet {
+  margin-bottom: 20px;
+}
+
+/* Chat Page */
+.chat-box {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  flex: 1;
+}
+
+#messages {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+textarea#messageInput {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #1DA1F2;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1A91DA;
+}
+
+/* Right Sidebar (Trending) */
+.sidebar.right {
+  width: 300px;
+  padding: 20px;
+}
+
+.right .trending ul {
+  list-style-type: none;
+}
+
+.right .trending ul li {
+  margin-bottom: 10px;
+}
+
+.right .trending h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.right input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.right .search-results {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.right .search-results ul {
+  list-style-type: none;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  nav.sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .main-feed {
+    padding: 15px;
+  }
+
+  .login-container {
+    padding: 20px;
+  }
+
+  .login-box {
+    width: 100%;
+  }
 }
