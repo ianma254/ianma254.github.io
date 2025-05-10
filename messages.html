@@ -1,43 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>UniverseApp - Messages</title>
-
-  <!-- Link to external CSS -->
-  <link rel="stylesheet" href="css/styles.css" />
-
-  <!-- Link to external JavaScript -->
-  <script defer src="js/messages.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to CSS file -->
 </head>
-<body class="messages-body">
+<body>
+    <div class="messages-container">
+        <h2>Messages</h2>
+        <div class="message-list">
+            <!-- Placeholder for list of conversations -->
+        </div>
 
-  <!-- Messages Page Content -->
-  <header class="messages-header">
-    <input type="text" class="search-bar" placeholder="Search Messages">
-    <div class="navbar">
-      <a href="home.html" class="navbar-item">Home</a>
-      <a href="explore.html" class="navbar-item">Explore</a>
-      <a href="messages.html" class="navbar-item">Messages</a>
-      <a href="profile.html" class="navbar-item">Profile</a>
-      <a href="logout.html" class="navbar-item">Logout</a>
+        <div class="message-area">
+            <input type="text" id="messageInput" placeholder="Type your message">
+            <button id="sendMessageButton">Send</button>
+        </div>
+
+        <div class="bottom-ribbon">
+            <button id="homeButton">Home</button>
+            <button id="profileButton">Profile</button>
+            <button id="exploreButton">Explore</button>
+        </div>
     </div>
-  </header>
 
-  <section class="messages-content">
-    <div class="message-list">
-      <!-- List of Messages will be displayed here -->
-    </div>
-  </section>
-
-  <footer class="bottom-nav">
-    <a href="home.html" class="bottom-nav-item">Home</a>
-    <a href="explore.html" class="bottom-nav-item">Explore</a>
-    <a href="messages.html" class="bottom-nav-item">Messages</a>
-    <a href="profile.html" class="bottom-nav-item">Profile</a>
-    <a href="logout.html" class="bottom-nav-item">Logout</a>
-  </footer>
-
+    <!-- Link to JavaScript file (will add logic in next step) -->
+    <script src="script.js"></script>
 </body>
 </html>
