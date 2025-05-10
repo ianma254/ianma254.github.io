@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #1DA1F2; /* Twitter-like blue */
+      background-color: #1DA1F2; /* Twitter blue */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -27,8 +27,14 @@
     }
 
     h1 {
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.5rem;
       color: #1DA1F2;
+    }
+
+    #emoji {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
     }
 
     input {
@@ -51,6 +57,7 @@
       border-radius: 6px;
       transition: all 0.3s ease;
       position: relative;
+      cursor: pointer;
     }
 
     #loginBtn.enabled:hover {
@@ -60,13 +67,17 @@
 
     .runaway {
       position: absolute;
-      transition: top 0.3s, left 0.3s;
+    }
+
+    .chasing {
+      background-color: red !important;
     }
   </style>
 </head>
 <body>
   <div class="login-container">
     <h1>Universe App</h1>
+    <div id="emoji">🙂</div>
     <form onsubmit="handleLogin(event)">
       <input type="text" id="username" placeholder="Username" required />
       <input type="password" id="password" placeholder="Password" required />
@@ -78,6 +89,7 @@
     const username = document.getElementById('username');
     const password = document.getElementById('password');
     const loginBtn = document.getElementById('loginBtn');
+    const emoji = document.getElementById('emoji');
     const container = document.querySelector('.login-container');
 
     function checkInputs() {
@@ -87,6 +99,9 @@
         loginBtn.style.position = 'relative';
         loginBtn.style.left = '0';
         loginBtn.style.top = '0';
+        loginBtn.classList.remove('chasing');
+        loginBtn.style.backgroundColor = 'purple';
+        emoji.textContent = '🙂';
       } else {
         loginBtn.classList.remove('enabled');
       }
@@ -95,16 +110,29 @@
     username.addEventListener('input', checkInputs);
     password.addEventListener('input', checkInputs);
 
-    loginBtn.addEventListener('mouseover', (e) => {
+    username.addEventListener('focus', () => emoji.textContent = '🙂');
+    password.addEventListener('focus', () => emoji.textContent = '🙂');
+
+    loginBtn.addEventListener('mouseover', () => {
       const filled = username.value.trim() && password.value.trim();
       if (!filled) {
-        const maxX = container.clientWidth - loginBtn.offsetWidth;
-        const maxY = container.clientHeight - loginBtn.offsetHeight - 60;
-        const randX = Math.random() * maxX;
-        const randY = Math.random() * maxY;
-        loginBtn.style.position = 'absolute';
-        loginBtn.style.left = randX + 'px';
-        loginBtn.style.top = randY + 'px';
+        const maxX = container.clientWidth - loginBtn.offsetWidth - 100;
+        const maxY = container.clientHeight - loginBtn.offsetHeight - 100;
+        const randX = Math.random() * maxX - 50;
+        const randY = Math.random() * maxY - 50;
+        loginBtn.style.left = `${randX}px`;
+        loginBtn.style.top = `${randY}px`;
+        loginBtn.classList.add('chasing');
+        emoji.textContent = '😠';
+      }
+    });
+
+    loginBtn.addEventListener('mouseleave', () => {
+      const filled = username.value.trim() && password.value.trim();
+      if (!filled) {
+        loginBtn.classList.remove('chasing');
+        loginBtn.style.backgroundColor = 'purple';
+        emoji.textContent = '🙂';
       }
     });
 
