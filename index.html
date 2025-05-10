@@ -1,26 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hex - Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Universe App - Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #1DA1F2; /* Twitter-like blue */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+      color: #1DA1F2;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    #loginBtn {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      background-color: purple;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    #loginBtn.enabled:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
+    }
+
+    .runaway {
+      position: absolute;
+      transition: top 0.3s, left 0.3s;
+    }
+  </style>
 </head>
-<body class="login-body">
+<body>
   <div class="login-container">
-    <h1>Welcome to Hex</h1>
-    <input type="text" id="username" placeholder="Enter your username" />
-    <button onclick="login()">Login</button>
+    <h1>Universe App</h1>
+    <form onsubmit="handleLogin(event)">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit" id="loginBtn" class="runaway">Login</button>
+    </form>
   </div>
 
   <script>
-    function login() {
-      const username = document.getElementById("username").value.trim();
-      if (username === "") {
-        alert("Please enter a username.");
-        return;
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const loginBtn = document.getElementById('loginBtn');
+    const container = document.querySelector('.login-container');
+
+    function checkInputs() {
+      const filled = username.value.trim() && password.value.trim();
+      if (filled) {
+        loginBtn.classList.add('enabled');
+        loginBtn.style.position = 'relative';
+        loginBtn.style.left = '0';
+        loginBtn.style.top = '0';
+      } else {
+        loginBtn.classList.remove('enabled');
       }
-      localStorage.setItem("hexUser", username); // Store user in localStorage
-      window.location.href = "home.html"; // Redirect to home page
+    }
+
+    username.addEventListener('input', checkInputs);
+    password.addEventListener('input', checkInputs);
+
+    loginBtn.addEventListener('mouseover', (e) => {
+      const filled = username.value.trim() && password.value.trim();
+      if (!filled) {
+        const maxX = container.clientWidth - loginBtn.offsetWidth;
+        const maxY = container.clientHeight - loginBtn.offsetHeight - 60;
+        const randX = Math.random() * maxX;
+        const randY = Math.random() * maxY;
+        loginBtn.style.position = 'absolute';
+        loginBtn.style.left = randX + 'px';
+        loginBtn.style.top = randY + 'px';
+      }
+    });
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const filled = username.value.trim() && password.value.trim();
+      if (filled) {
+        window.location.href = 'home.html';
+      }
     }
   </script>
 </body>
