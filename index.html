@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Universe App Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Universe App</title>
   <style>
     body {
       margin: 0;
@@ -67,7 +68,7 @@
     <h2>Login to Universe</h2>
     <input type="text" placeholder="Username" id="username" />
     <input type="password" placeholder="Password" id="password" />
-    <button id="loginBtn">Login</button>
+    <button id="loginBtn" type="button">Login</button>
   </div>
 
   <script>
@@ -77,60 +78,53 @@
     const password = document.getElementById('password');
     const emoji = document.getElementById('emoji');
 
-    let hovering = false;
-    let filled = false;
-
     function isInputFilled() {
-      return username.value.trim() !== "" && password.value.trim() !== "";
+      return username.value.trim() !== '' && password.value.trim() !== '';
     }
 
-    function moveButton() {
-      const containerRect = container.getBoundingClientRect();
-      const btnWidth = btn.offsetWidth;
-      const btnHeight = btn.offsetHeight;
-      const maxLeft = containerRect.width - btnWidth;
-      const maxTop = containerRect.height - btnHeight;
-      const newLeft = Math.floor(Math.random() * maxLeft);
-      const newTop = Math.floor(Math.random() * maxTop);
-
-      btn.style.left = `${newLeft}px`;
-      btn.style.top = `${newTop}px`;
-    }
-
-    btn.addEventListener('mouseover', () => {
+    btn.addEventListener('mouseenter', () => {
       if (!isInputFilled()) {
-        btn.classList.add("flicker");
-        btn.style.backgroundColor = "red";
-        emoji.textContent = "😠";
-        moveButton();
+        emoji.textContent = '😠';
+        btn.style.transform = 'translate(20px, 20px)';
+        btn.style.transition = 'transform 0.3s ease, background-color 0.3s ease';
+        btn.style.backgroundColor = 'red';
+        container.classList.add('flicker');
       }
     });
 
-    btn.addEventListener('click', () => {
-      if (isInputFilled()) {
-        window.location.href = 'home.html';
+    btn.addEventListener('mouseleave', () => {
+      if (!isInputFilled()) {
+        emoji.textContent = '🙂';
+        btn.style.transform = 'translate(0, 0)';
+        btn.style.backgroundColor = 'purple';
+        container.classList.remove('flicker');
       }
     });
 
+    // When user starts typing, stop the button from running away
     username.addEventListener('input', () => {
       if (isInputFilled()) {
-        resetButton();
+        btn.style.position = 'absolute';
+        btn.style.left = '120px';
+        btn.style.top = '180px'; // Keep the button below the input fields
+        btn.style.transition = 'none'; // Stop animation on user input
       }
     });
 
     password.addEventListener('input', () => {
       if (isInputFilled()) {
-        resetButton();
+        btn.style.position = 'absolute';
+        btn.style.left = '120px';
+        btn.style.top = '180px';
+        btn.style.transition = 'none';
       }
     });
 
-    function resetButton() {
-      btn.classList.remove("flicker");
-      btn.style.backgroundColor = "purple";
-      btn.style.left = "120px";
-      btn.style.top = "220px";
-      emoji.textContent = "🙂";
-    }
+    btn.addEventListener('click', () => {
+      if (isInputFilled()) {
+        window.location.href = 'home.html'; // Redirect to home.html if credentials are entered
+      }
+    });
   </script>
 </body>
 </html>
