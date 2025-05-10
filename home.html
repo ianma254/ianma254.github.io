@@ -1,47 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hex - Homepage</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - Universe App</title>
+  <style>
+    /* Basic styling for the whole page */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #00b14f; /* M-Pesa Green theme */
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Top navigation bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.7); /* Transparent background */
+    }
+
+    /* Search bar styling */
+    .search-bar {
+      width: 300px;
+      height: 40px;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #003366; /* Deep blue color */
+      background-color: transparent;
+      color: #003366;
+      font-size: 16px;
+    }
+
+    /* Icons navigation */
+    .nav-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      padding: 20px 0;
+      width: 100%;
+    }
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .icon-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #003366;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .icon-name {
+      color: #003366;
+      font-size: 14px;
+    }
+
+    /* Sections beneath the navbar */
+    .sections {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .sections-row {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      color: #003366;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* Pseudo posts */
+    .post {
+      width: 100%;
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #003366;
+    }
+
+    .post-body {
+      font-size: 14px;
+      color: #333;
+    }
+
+  </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Left Sidebar -->
-    <nav class="sidebar">
-      <h2>Hex</h2>
-      <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="search.html">Explore</a></li>
-        <li><a href="chat.html">Messages</a></li>
-        <li><a href="profile.html">Profile</a></li>
-        <li onclick="logout()">Logout</li>
-      </ul>
-    </nav>
-
-    <!-- Main Feed -->
-    <main class="main-feed">
-      <div class="tweet-box">
-        <textarea id="tweetInput" placeholder="What's happening?"></textarea>
-        <button onclick="postTweet()">Post</button>
-      </div>
-      <div id="feed" class="feed"></div> <!-- Display user posts here -->
-    </main>
-
-    <!-- Right Sidebar -->
-    <aside class="sidebar right">
-      <input type="text" placeholder="Search Hex">
-      <div class="trending">
-        <h3>Trending</h3>
-        <ul>
-          <li>#HexUpdate</li>
-          <li>#NewFeatures</li>
-          <li>#UserEngagement</li>
-        </ul>
-      </div>
-    </aside>
+  <!-- Navbar with Search Bar -->
+  <div class="navbar">
+    <input class="search-bar" type="text" placeholder="Search..." />
   </div>
 
-  <script src="script.js"></script>
+  <!-- Icons navigation -->
+  <div class="nav-icons">
+    <div class="icon">
+      <div class="icon-circle">🏠</div>
+      <div class="icon-name">Home</div>
+    </div>
+    <div class="icon">
+      <div class="icon-circle">🔍</div>
+      <div class="icon-name">Explore</div>
+    </div>
+    <div class="icon">
+      <div class="icon-circle">💬</div>
+      <div class="icon-name">Messages</div>
+    </div>
+    <div class="icon">
+      <div class="icon-circle">👤</div>
+      <div class="icon-name">Profile</div>
+    </div>
+    <div class="icon">
+      <div class="icon-circle">🚪</div>
+      <div class="icon-name">Log Out</div>
+    </div>
+  </div>
+
+  <!-- Sections: Daily Update, Activities by Your Following, What's Trending -->
+  <div class="sections">
+    <div class="sections-row">
+      <div class="section-title">The Daily Update</div>
+      <div class="section-title">Activities by Your Following</div>
+      <div class="section-title">What's Trending</div>
+    </div>
+
+    <!-- Pseudo posts -->
+    <div class="post">
+      <div class="post-title">Post Title 1</div>
+      <div class="post-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin suscipit felis sit amet metus...</div>
+    </div>
+    <div class="post">
+      <div class="post-title">Post Title 2</div>
+      <div class="post-body">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Integer nec odio...</div>
+    </div>
+    <div class="post">
+      <div class="post-title">Post Title 3</div>
+      <div class="post-body">Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra...</div>
+    </div>
+  </div>
+
 </body>
 </html>
