@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home - Universe App</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #1DA1F2;
-      color: white;
+      background-color: #0a0f1a; /* Dark blue theme */
+      color: #e0e0e0;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -27,78 +27,78 @@
       font-size: 16px;
       border: none;
       border-radius: 25px;
-      background-color: rgba(255, 255, 255, 0.2);
-      color: #003366;
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #00bfff;
       text-align: center;
     }
 
     .tabs {
       display: flex;
       justify-content: center;
-      gap: 25px;
+      gap: 20px;
       padding: 10px;
     }
 
     .tab {
-      padding: 10px 18px;
+      padding: 10px 16px;
+      border-radius: 20px;
       background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 30px;
       cursor: pointer;
       transition: 0.3s;
-      box-shadow: 0 0 0px transparent;
     }
 
     .tab:hover {
-      box-shadow: 0 0 12px #ffffff;
+      box-shadow: 0 0 8px #ffffff;
     }
 
     .posts {
       flex: 1;
-      padding: 15px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 25px;
     }
 
     .post {
-      background-color: #ffffff;
-      color: #1a1a1a;
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      max-width: 90%;
+      word-wrap: break-word;
     }
 
     .post-header {
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .post-content {
       font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .post img {
+      max-width: 100%;
+      border-radius: 10px;
     }
 
     .bottom-nav {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.05);
       display: flex;
       justify-content: space-around;
       padding: 12px 0;
-      border-top: 1px solid #ffffff55;
+      border-top: 1px solid #444;
     }
 
     .nav-item {
       text-align: center;
-      color: white;
       font-size: 14px;
       cursor: pointer;
       padding: 8px;
       transition: all 0.2s;
-      border-radius: 50%;
       text-decoration: none;
+      color: #e0e0e0;
     }
 
     .nav-item:hover {
-      background-color: rgba(0, 255, 0, 0.3);
-      color: #ffffff;
+      color: #00ff99;
     }
   </style>
 </head>
@@ -109,24 +109,13 @@
   </div>
 
   <div class="tabs">
-    <div class="tab">Daily Update</div>
-    <div class="tab">Activities by Your Following</div>
-    <div class="tab">What's Trending</div>
+    <div class="tab" onclick="showTab('daily')">Daily Update</div>
+    <div class="tab" onclick="showTab('following')">Activities by Your Following</div>
+    <div class="tab" onclick="showTab('trending')">What's Trending</div>
   </div>
 
-  <div class="posts">
-    <div class="post">
-      <div class="post-header">@user1 · 2h</div>
-      <div class="post-content">Welcome to Universe App! This is your first pseudo post. Enjoy exploring!</div>
-    </div>
-    <div class="post">
-      <div class="post-header">@follower2 · 1h</div>
-      <div class="post-content">Can't believe how smooth the new interface feels. Loving the dark blue!</div>
-    </div>
-    <div class="post">
-      <div class="post-header">@trendwatch · 30m</div>
-      <div class="post-content">#UniverseApp is trending worldwide. Dive in and see what the hype is about!</div>
-    </div>
+  <div id="postContainer" class="posts">
+    <!-- Posts will be inserted here dynamically -->
   </div>
 
   <div class="bottom-nav">
@@ -136,6 +125,40 @@
     <a href="profile.html" class="nav-item">Profile</a>
     <a href="logout.html" class="nav-item">Log Out</a>
   </div>
+
+  <script>
+    const posts = {
+      daily: [
+        { user: '@skywatch', time: '2h', text: 'The stars are beautiful tonight!', img: 'https://via.placeholder.com/300x150' },
+        { user: '@cosmicdream', time: '1h', text: 'Daily update: more galaxies discovered.', img: 'https://via.placeholder.com/300x150' }
+      ],
+      following: [
+        { user: '@follower1', time: '45m', text: 'Shared something new!', img: 'https://via.placeholder.com/300x150' },
+        { user: '@astrofan', time: '15m', text: 'Just saw a comet with my telescope!', img: 'https://via.placeholder.com/300x150' }
+      ],
+      trending: [
+        { user: '@trendingtopic', time: '10m', text: '#UniverseApp is viral!', img: 'https://via.placeholder.com/300x150' },
+        { user: '@buzzstar', time: '5m', text: 'Trending update from space tech world.', img: 'https://via.placeholder.com/300x150' }
+      ]
+    };
+
+    function showTab(type) {
+      const container = document.getElementById('postContainer');
+      container.innerHTML = '';
+      posts[type].forEach(post => {
+        const postEl = document.createElement('div');
+        postEl.className = 'post';
+        postEl.innerHTML = `
+          <div class="post-header">${post.user} · ${post.time}</div>
+          <div class="post-content">${post.text}</div>
+          <img src="${post.img}" alt="Post image">
+        `;
+        container.appendChild(postEl);
+      });
+    }
+
+    showTab('daily');
+  </script>
 
 </body>
 </html>
