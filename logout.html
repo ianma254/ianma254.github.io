@@ -1,34 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>UniverseApp - Logout</title>
-
-  <!-- Link to external CSS -->
-  <link rel="stylesheet" href="css/styles.css" />
-
-  <!-- Link to external JavaScript -->
-  <script defer src="js/logout.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to CSS file -->
 </head>
-<body class="logout-body">
+<body>
+    <div class="logout-container">
+        <h2>You have successfully logged out</h2>
+        <p>Click the button below to go back to the login page.</p>
+        <button id="backToLoginButton">Back to Login</button>
+    </div>
 
-  <!-- Logout Page Content -->
-  <header class="logout-header">
-    <h1>Logout from UniverseApp</h1>
-  </header>
-
-  <section class="logout-content">
-    <button class="logout-btn" onclick="window.location.href='login.html'">Logout</button>
-  </section>
-
-  <footer class="bottom-nav">
-    <a href="home.html" class="bottom-nav-item">Home</a>
-    <a href="explore.html" class="bottom-nav-item">Explore</a>
-    <a href="messages.html" class="bottom-nav-item">Messages</a>
-    <a href="profile.html" class="bottom-nav-item">Profile</a>
-    <a href="logout.html" class="bottom-nav-item">Logout</a>
-  </footer>
-
+    <!-- Link to JavaScript file (will add logic in next step) -->
+    <script src="script.js"></script>
 </body>
 </html>
