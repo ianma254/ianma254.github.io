@@ -2,144 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UniverseApp Home</title>
-  <style>
-    body {
-      margin: 0;
-      background-color: #0a0f1a; /* Dark blue theme */
-      font-family: Arial, sans-serif;
-      color: #ffffff;
-    }
-    header, nav, footer {
-      background-color: #111827;
-      padding: 10px;
-      text-align: center;
-    }
-    .search-bar {
-      margin: 10px auto;
-      display: flex;
-      justify-content: center;
-    }
-    .search-bar input {
-      width: 50%;
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-    }
-    .filters {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 10px 0;
-    }
-    .filters div {
-      color: #3b82f6;
-      cursor: pointer;
-      position: relative;
-    }
-    .filters div:hover {
-      color: #10b981;
-    }
-    .filters div::after {
-      content: '';
-      display: block;
-      margin: auto;
-      height: 4px;
-      width: 0;
-      background: #10b981;
-      transition: width .3s ease;
-    }
-    .filters div:hover::after {
-      width: 100%;
-    }
-    .post-container {
-      width: 80%;
-      margin: 20px auto;
-    }
-    .post {
-      background: transparent;
-      border-bottom: 1px solid #2d3748;
-      padding: 15px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      word-wrap: break-word;
-    }
-    .post img {
-      max-width: 100%;
-      border-radius: 10px;
-    }
-    footer nav {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
-    }
-    .nav-item {
-      color: #3b82f6;
-      cursor: pointer;
-    }
-    .nav-item:hover {
-      color: #10b981;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UniverseApp - Home</title>
+
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Link to external JavaScript -->
+  <script defer src="js/home.js"></script>
 </head>
-<body>
-  <header>
-    <h2>UniverseApp</h2>
+<body class="home-body">
+
+  <!-- Home Page Content -->
+  <header class="home-header">
+    <input type="text" class="search-bar" placeholder="Search Users and Posts">
+    <div class="navbar">
+      <a href="home.html" class="navbar-item">Home</a>
+      <a href="explore.html" class="navbar-item">Explore</a>
+      <a href="messages.html" class="navbar-item">Messages</a>
+      <a href="profile.html" class="navbar-item">Profile</a>
+      <a href="logout.html" class="navbar-item">Logout</a>
+    </div>
   </header>
 
-  <div class="search-bar">
-    <input type="text" placeholder="Search users or posts..." />
-  </div>
+  <section class="main-content">
+    <div class="posts-section">
+      <!-- Posts will be dynamically loaded here -->
+    </div>
+  </section>
 
-  <div class="filters">
-    <div onclick="switchCategory('daily')">Daily Update</div>
-    <div onclick="switchCategory('following')">Activities by Following</div>
-    <div onclick="switchCategory('trending')">What's Trending</div>
-  </div>
-
-  <div id="postArea" class="post-container"></div>
-
-  <footer>
-    <nav>
-      <div class="nav-item" onclick="location.href='home.html'">Home</div>
-      <div class="nav-item" onclick="location.href='explore.html'">Explore</div>
-      <div class="nav-item" onclick="location.href='messages.html'">Messages</div>
-      <div class="nav-item" onclick="location.href='profile.html'">Profile</div>
-      <div class="nav-item" onclick="location.href='index.html'">Log Out</div>
-    </nav>
+  <footer class="bottom-nav">
+    <a href="home.html" class="bottom-nav-item">Home</a>
+    <a href="explore.html" class="bottom-nav-item">Explore</a>
+    <a href="messages.html" class="bottom-nav-item">Messages</a>
+    <a href="profile.html" class="bottom-nav-item">Profile</a>
+    <a href="logout.html" class="bottom-nav-item">Logout</a>
   </footer>
 
-  <script>
-    const postArea = document.getElementById('postArea');
-    let currentCategory = 'daily';
-
-    function generatePost(category, index) {
-      return `
-        <div class="post">
-          <strong>${category.toUpperCase()} POST #${index + 1}</strong>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Post ${index + 1} by ${category}</p>
-          <img src="https://picsum.photos/seed/${category + index}/400/200" alt="Post image" />
-        </div>
-      `;
-    }
-
-    function renderPosts(category) {
-      let postsHTML = '';
-      for (let i = 0; i < 20; i++) {
-        postsHTML += generatePost(category, i);
-      }
-      postArea.innerHTML = postsHTML;
-    }
-
-    function switchCategory(category) {
-      currentCategory = category;
-      renderPosts(category);
-    }
-
-    // Initial load
-    renderPosts(currentCategory);
-  </script>
 </body>
 </html>
