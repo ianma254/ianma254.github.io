@@ -1,33 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hex - Profile</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      background-color: #0e0f13;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .cover-photo {
+      background-image: url('media/cover.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 200px;
+      position: relative;
+    }
+    .profile-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid #0e0f13;
+      position: absolute;
+      bottom: -60px;
+      left: 20px;
+      background-image: url('media/profile.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    .profile-info {
+      margin-top: 80px;
+      padding: 0 20px;
+    }
+    .profile-info h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+    .settings-button {
+      float: right;
+      margin-top: -40px;
+      margin-right: 20px;
+      background-color: #1c2333;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+    .settings-button:hover {
+      background-color: #00cc99;
+    }
+    .about-section {
+      margin: 30px 20px;
+      background-color: #1a1b22;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #1c2333;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .bottom-nav a {
+      color: #00aaff;
+      text-decoration: none;
+      text-align: center;
+      font-size: 14px;
+    }
+    .bottom-nav a:hover {
+      color: #00cc99;
+    }
+    .bottom-nav i {
+      display: block;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <nav class="sidebar">
-      <h2>Hex</h2>
-      <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="search.html">Explore</a></li>
-        <li><a href="chat.html">Messages</a></li>
-        <li><a href="profile.html">Profile</a></li>
-        <li onclick="logout()">Logout</li>
-      </ul>
-    </nav>
-
-    <main class="profile">
-      <h2>Your Profile</h2>
-      <div class="profile-info">
-        <p>Username: <strong id="profileUsername">loading...</strong></p>
-        <p>Bio: <span id="profileBio">This is the user's bio.</span></p>
-      </div>
-      <div id="userPosts" class="user-posts"></div>
-    </main>
+  <div class="cover-photo">
+    <div class="profile-photo"></div>
+  </div>
+  <div class="profile-info">
+    <h1>Username</h1>
+    <button class="settings-button">Edit Profile</button>
   </div>
 
-  <script src="script.js"></script>
+  <div class="about-section">
+    <h2>About</h2>
+    <p>This is a sample profile bio. You can add your details here.</p>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="home.html"><i class="fas fa-home"></i>Home</a>
+    <a href="explore.html"><i class="fas fa-hashtag"></i>Explore</a>
+    <a href="messages.html"><i class="fas fa-envelope"></i>Messages</a>
+    <a href="profile.html"><i class="fas fa-user"></i>Profile</a>
+    <a href="index.html"><i class="fas fa-sign-out-alt"></i>Logout</a>
+  </div>
 </body>
 </html>
