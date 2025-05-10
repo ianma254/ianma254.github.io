@@ -3,151 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Explore Users - UniverseApp</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background-color: #0e1a2b;
-      color: white;
-    }
+  <title>UniverseApp - Explore</title>
 
-    header {
-      background-color: #1a2b40;
-      padding: 15px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="css/styles.css" />
 
-    .search-bar {
-      width: 80%;
-      max-width: 600px;
-      padding: 10px;
-      border-radius: 25px;
-      border: none;
-      font-size: 16px;
-      outline: none;
-    }
-
-    .user-list {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .user-card {
-      background-color: #1f2d3e;
-      border-radius: 15px;
-      padding: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .user-info img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .user-details {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .user-details .name {
-      font-size: 18px;
-      font-weight: bold;
-      color: #4fa3ff;
-    }
-
-    .user-details .bio {
-      font-size: 14px;
-      color: #d0d0d0;
-    }
-
-    .follow-btn {
-      background-color: #4fa3ff;
-      border: none;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
-
-    .follow-btn:hover {
-      background-color: #35d07f;
-    }
-  </style>
+  <!-- Link to external JavaScript -->
+  <script defer src="js/explore.js"></script>
 </head>
-<body>
+<body class="explore-body">
 
-  <header>
-    <input type="text" class="search-bar" placeholder="Search for users..." oninput="filterUsers(this.value)" />
+  <!-- Explore Page Content -->
+  <header class="explore-header">
+    <input type="text" class="search-bar" placeholder="Search Users">
+    <div class="navbar">
+      <a href="home.html" class="navbar-item">Home</a>
+      <a href="explore.html" class="navbar-item">Explore</a>
+      <a href="messages.html" class="navbar-item">Messages</a>
+      <a href="profile.html" class="navbar-item">Profile</a>
+      <a href="logout.html" class="navbar-item">Logout</a>
+    </div>
   </header>
 
-  <section class="user-list" id="userList">
-    <!-- JS will populate users here -->
+  <section class="explore-content">
+    <div class="user-list">
+      <!-- List of Users will appear here -->
+    </div>
   </section>
 
-  <script>
-    const users = Array.from({ length: 100 }, (_, i) => ({
-      name: `User ${i + 1}`,
-      university: `University ${i % 10 + 1}`,
-      course: `Course ${i % 5 + 1}`,
-      image: `https://randomuser.me/api/portraits/men/${i % 100}.jpg`,
-      isFollowing: false
-    }));
+  <footer class="bottom-nav">
+    <a href="home.html" class="bottom-nav-item">Home</a>
+    <a href="explore.html" class="bottom-nav-item">Explore</a>
+    <a href="messages.html" class="bottom-nav-item">Messages</a>
+    <a href="profile.html" class="bottom-nav-item">Profile</a>
+    <a href="logout.html" class="bottom-nav-item">Logout</a>
+  </footer>
 
-    const userList = document.getElementById('userList');
-
-    function renderUsers(filter = '') {
-      userList.innerHTML = '';
-      users
-        .filter(u => u.name.toLowerCase().includes(filter.toLowerCase()))
-        .forEach((user, index) => {
-          const card = document.createElement('div');
-          card.className = 'user-card';
-          card.innerHTML = `
-            <div class="user-info">
-              <img src="${user.image}" alt="${user.name}" />
-              <div class="user-details">
-                <div class="name">${user.name}</div>
-                <div class="bio">${user.university} - ${user.course}</div>
-              </div>
-            </div>
-            <button class="follow-btn" onclick="toggleFollow(${index}, this)">
-              ${user.isFollowing ? 'Unfollow' : 'Follow'}
-            </button>
-          `;
-          userList.appendChild(card);
-        });
-    }
-
-    function toggleFollow(index, btn) {
-      users[index].isFollowing = !users[index].isFollowing;
-      btn.textContent = users[index].isFollowing ? 'Unfollow' : 'Follow';
-    }
-
-    function filterUsers(query) {
-      renderUsers(query);
-    }
-
-    // Initial render
-    renderUsers();
-  </script>
 </body>
 </html>
