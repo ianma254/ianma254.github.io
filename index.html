@@ -3,30 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Universe App</title>
+  <title>UniverseApp</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="bg-image"></div>
-  <div class="overlay">
-    <div class="container">
-      <div class="left">
-        <img src="https://i.ibb.co/HBD3t9C/universe-graphic.png" alt="Universe Graphic" />
+  <header>
+    <img src="assets/logo.png" alt="UniverseApp Logo" class="logo" />
+    <h1>UniverseApp</h1>
+  </header>
+
+  <main>
+    <section class="login" id="loginSection">
+      <h2>Login</h2>
+      <input type="text" id="usernameInput" placeholder="Enter your name"/>
+      <button onclick="login()">Enter</button>
+    </section>
+
+    <section class="app hidden" id="mainApp">
+      <div class="tweetBox">
+        <textarea id="tweetInput" placeholder="What's happening?"></textarea>
+        <button onclick="postTweet()">Tweet</button>
       </div>
-      <div class="right">
-        <h1>Welcome to Universe</h1>
-        <h2>Connect beyond galaxies.</h2>
-        <form id="loginForm">
-          <input type="text" id="username" placeholder="Username" />
-          <input type="password" id="password" placeholder="Password" />
-          <div class="buttons">
-            <button type="button" class="signup">Get Started</button>
-            <button type="submit" class="login" id="loginBtn">Login</button>
-          </div>
-        </form>
+      <div id="feed" class="feed">
+        <!-- Tweets will appear here -->
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>UniverseApp &copy; 2025</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
