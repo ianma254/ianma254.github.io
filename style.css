@@ -1,327 +1,225 @@
-/* General Page Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Theme */
+/* === Global Settings === */
 body {
-  background-color: #0a0a23; /* Dark, barely noticeable blue */
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background-color: #0d0d0d;
   color: #ffffff;
-  overflow-x: hidden;
 }
 
-a {
-  text-decoration: none;
-  color: #1e90ff;
-  transition: color 0.3s ease;
+main {
+  padding: 80px 20px 100px; /* Leave space for fixed top and bottom bars */
 }
 
-a:hover {
-  color: #00ff99;
-}
-
-/* Login Page */
-.login-container {
-  width: 90%;
-  max-width: 400px;
-  margin: 100px auto;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px #0ff;
-  text-align: center;
-}
-
-.login-container h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-}
-
-.login-container input {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
-  border: none;
-  border-radius: 8px;
-}
-
-#loginButton {
-  padding: 10px 20px;
-  margin-top: 20px;
-  background: #1e90ff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-#loginButton:hover {
-  background: #00ff99;
-}
-
-/* Moving login button animation */
-.login-container:hover #loginButton {
-  animation: evade 3s infinite;
-}
-
-@keyframes evade {
-  0% { transform: translate(0, 0); }
-  25% { transform: translate(100px, 0); }
-  50% { transform: translate(0, 50px); }
-  75% { transform: translate(-100px, 0); }
-  100% { transform: translate(0, 0); }
-}
-
-/* Home & General Pages */
-.header {
-  text-align: center;
-  padding: 15px;
-  font-size: 20px;
-  background-color: #0f172a;
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
-
-.search-bar {
-  margin: 20px auto;
-  max-width: 600px;
-  text-align: center;
-}
-
-.search-bar input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 25px;
-  border: none;
-  background: transparent;
-  color: #1e90ff;
-  border: 1px solid #1e90ff;
-  font-size: 16px;
-}
-
-.filters {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 10px;
-  gap: 10px;
-}
-
-.filter {
-  padding: 10px 15px;
-  border-radius: 25px;
-  background: #0f172a;
-  color: #1e90ff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid #1e90ff;
-}
-
-.filter:hover {
-  box-shadow: 0 0 10px #00ff99;
-}
-
-/* Posts */
-.posts {
-  max-width: 750px;
-  margin: auto;
-  padding-bottom: 80px;
-}
-
-.post {
-  margin: 20px;
-  padding: 15px;
-  color: #e0e0e0;
-  border-bottom: 1px solid #333;
-  word-wrap: break-word;
-}
-
-.post img {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-top: 10px;
-}
-
-/* Bottom ribbon */
-.bottom-ribbon {
+header, footer {
   position: fixed;
-  bottom: 0;
   width: 100%;
-  background-color: #0f172a;
+  z-index: 10;
+}
+
+/* === Header === */
+header {
+  top: 0;
+  background-color: #1a1a1a;
+  padding: 10px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* === Bottom Ribbon Navigation === */
+footer {
+  bottom: 0;
+  background-color: #1a1a1a;
   display: flex;
   justify-content: space-around;
   padding: 10px 0;
-  border-top: 1px solid #1e90ff;
-  z-index: 999;
+  border-top: 1px solid #444;
 }
 
-.bottom-ribbon a {
-  text-align: center;
-  font-size: 14px;
-  color: #1e90ff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+footer a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
 }
 
-.bottom-ribbon a:hover {
-  color: #00ff99;
-  transform: scale(1.1);
-}
-
-.bottom-ribbon i {
-  font-size: 20px;
-  margin-bottom: 3px;
-}
-
-/* Messages Page */
-.chat-container {
-  max-width: 900px;
+/* === Login Page === */
+.login-container {
+  max-width: 400px;
   margin: 100px auto;
-  background-color: #1a1a2e;
   padding: 20px;
+  background-color: #262626;
   border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  text-align: center;
 }
 
-.user-list-toggle {
-  background: #1e90ff;
-  padding: 8px 12px;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.user-list {
-  display: none;
-  margin-bottom: 20px;
-}
-
-.user-list.active {
+.login-container input {
   display: block;
-}
-
-.message-box {
-  background: #0a0a23;
-  padding: 15px;
-  border-radius: 10px;
-  height: 300px;
-  overflow-y: auto;
-  color: #ffffff;
-}
-
-.message-box .message {
-  margin-bottom: 10px;
+  width: 100%;
+  margin: 10px 0;
   padding: 10px;
-  background-color: #0f172a;
-  border-radius: 8px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
 }
 
-/* Profile Page */
+.login-container button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 18px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* === Profile Page === */
 .profile-header {
   position: relative;
-  background: #1e90ff;
-  height: 150px;
+  text-align: center;
+  background-color: #111;
 }
 
-.profile-picture {
-  position: absolute;
-  bottom: -40px;
-  left: 20px;
-  border: 4px solid #0a0a23;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
+.profile-header img.bg {
+  width: 100%;
+  height: 200px;
   object-fit: cover;
 }
 
-.profile-info {
-  padding: 60px 20px 20px 20px;
-  background-color: #0a0a23;
+.profile-header img.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.profile-info h3 {
-  margin-bottom: 5px;
+.profile-body {
+  padding-top: 80px;
+  text-align: center;
 }
 
-.profile-info p {
-  font-size: 14px;
-  color: #aaa;
+.profile-description {
+  font-style: italic;
+  color: #ccc;
+  margin-top: 10px;
 }
 
-.media-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 10px;
-  padding: 20px;
+.profile-followers {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  font-weight: bold;
 }
 
-.media-grid img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-/* Explore Page */
+/* === Explore Page === */
 .explore-container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.explore-user {
+.user-card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #1a1a2e;
-  padding: 15px;
-  margin-bottom: 10px;
-  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.4);
 }
 
-.explore-user img {
+.user-card img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  margin-right: 10px;
 }
 
-.explore-user-info {
-  flex-grow: 1;
+.user-details {
+  flex: 1;
   margin-left: 10px;
 }
 
-.explore-user button {
-  padding: 6px 12px;
-  border: none;
-  background: #1e90ff;
+.follow-btn {
+  padding: 8px 16px;
+  background-color: #28a745;
   color: white;
-  border-radius: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* === Messages Page === */
+.message-header {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #111;
+  padding: 15px;
+  position: sticky;
+  top: 50px;
+  z-index: 5;
+}
+
+.chat-box {
+  background-color: #1e1e1e;
+  margin: 15px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.user-list {
+  padding: 10px;
+  background-color: #111;
+  display: none;
+}
+
+/* === Logout Page === */
+.logout-container {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.logout-container button {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
-.explore-user button:hover {
-  background: #00ff99;
+.logout-container button:hover {
+  background-color: #b52a3b;
 }
 
-/* Home Button */
+/* === Utility === */
 .home-button {
-  position: fixed;
+  position: absolute;
   top: 10px;
   left: 10px;
-  background: #1e90ff;
+  font-size: 18px;
   color: white;
-  padding: 8px 12px;
-  border-radius: 8px;
-  z-index: 1000;
+  text-decoration: none;
+  background-color: #333;
+  padding: 6px 12px;
+  border-radius: 6px;
 }
 
 .home-button:hover {
-  background: #00ff99;
+  background-color: #555;
 }
