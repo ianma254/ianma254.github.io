@@ -1,122 +1,69 @@
-* {
+body {
+  font-family: Arial, sans-serif;
+  background: #15202b;
+  color: #ffffff;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body, html {
-  height: 100%;
-  overflow: hidden;
-}
-
-.bg-image {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: url('https://images.unsplash.com/photo-1580428188244-82d6c30921b3?auto=format&fit=crop&w=1600&q=80') no-repeat center center/cover;
-  z-index: -2;
-}
-
-.overlay {
-  background: rgba(0, 0, 0, 0.7);
-  min-height: 100vh;
+header {
+  background-color: #1da1f2;
   display: flex;
-  justify-content: center;
   align-items: center;
+  padding: 10px;
 }
 
-.container {
-  display: flex;
-  width: 90%;
-  max-width: 1000px;
-  height: 80vh;
-  border-radius: 16px;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  background-color: rgba(18, 18, 30, 0.8);
-  box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
 }
 
-.left {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+h1 {
+  margin: 0;
 }
 
-.left img {
-  max-width: 100%;
-  height: auto;
+.login, .app {
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
 }
 
-.right {
-  flex: 1;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.right h1 {
-  font-size: 2.8em;
-  color: #7df9ff;
-  margin-bottom: 10px;
-  text-shadow: 0 0 10px #00ffff;
-}
-
-.right h2 {
-  font-size: 1.4em;
-  color: #ccc;
-  margin-bottom: 20px;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-input {
-  margin-bottom: 15px;
-  padding: 14px;
+input, textarea {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
   border: none;
-  border-radius: 8px;
-  font-size: 1em;
-}
-
-.buttons {
-  position: relative;
-  display: flex;
-  gap: 15px;
+  border-radius: 5px;
 }
 
 button {
-  padding: 14px 24px;
-  font-size: 1em;
+  background-color: #1da1f2;
   border: none;
-  border-radius: 30px;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s ease;
 }
 
-.signup {
-  background-color: #00ffff;
-  color: #121212;
+.feed {
+  margin-top: 20px;
 }
 
-.signup:hover {
-  background-color: #00dddd;
+.tweet {
+  background-color: #192734;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 10px;
+  text-align: left;
 }
 
-.login {
-  background-color: transparent;
-  color: #00ffff;
-  border: 2px solid #00ffff;
-  position: relative;
+.hidden {
+  display: none;
 }
 
-.login:hover {
-  background-color: #00ffff;
-  color: #121212;
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #0a0a0a;
 }
