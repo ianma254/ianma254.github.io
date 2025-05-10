@@ -3,162 +3,154 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home - Universe App</title>
+  <title>UniverseApp - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0a0f1a; /* Dark blue theme */
-      color: #e0e0e0;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      padding: 0;
+      background-color: #0d1117;
+      color: #e6edf3;
+      font-family: Arial, sans-serif;
     }
 
-    .search-container {
-      display: flex;
-      justify-content: center;
-      padding: 15px;
-    }
-
-    .search-bar {
-      width: 60%;
-      padding: 10px;
-      font-size: 16px;
-      border: none;
-      border-radius: 25px;
-      background-color: rgba(255, 255, 255, 0.08);
-      color: #00bfff;
+    header {
       text-align: center;
+      padding: 10px;
     }
 
-    .tabs {
+    #search-bar {
+      background: transparent;
+      border: 2px solid #1f6feb;
+      padding: 8px 12px;
+      color: #e6edf3;
+      font-size: 16px;
+      border-radius: 20px;
+      width: 60%;
+      margin-top: 10px;
+    }
+
+    .nav-tabs {
       display: flex;
       justify-content: center;
+      margin: 20px 0;
       gap: 20px;
-      padding: 10px;
     }
 
     .tab {
-      padding: 10px 16px;
+      padding: 8px 15px;
+      background: #161b22;
       border-radius: 20px;
-      background-color: rgba(255, 255, 255, 0.1);
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s ease;
     }
 
     .tab:hover {
-      box-shadow: 0 0 8px #ffffff;
+      box-shadow: 0 0 10px #58a6ff;
+      background-color: #1f6feb;
     }
 
-    .posts {
-      flex: 1;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
+    .posts-container {
+      max-width: 750px;
+      margin: auto;
     }
 
     .post {
-      max-width: 90%;
+      background-color: #0d1117;
+      border-bottom: 1px solid #21262d;
+      padding: 15px;
       word-wrap: break-word;
     }
 
-    .post-header {
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    .post-content {
-      font-size: 15px;
-      margin-bottom: 6px;
-    }
-
     .post img {
-      max-width: 100%;
+      width: 100%;
+      margin-top: 10px;
       border-radius: 10px;
     }
 
-    .bottom-nav {
-      background-color: rgba(255, 255, 255, 0.05);
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #161b22;
       display: flex;
       justify-content: space-around;
-      padding: 12px 0;
-      border-top: 1px solid #444;
+      padding: 10px 0;
+      border-top: 1px solid #21262d;
     }
 
-    .nav-item {
+    .footer-link {
       text-align: center;
-      font-size: 14px;
-      cursor: pointer;
-      padding: 8px;
-      transition: all 0.2s;
+      color: #58a6ff;
       text-decoration: none;
-      color: #e0e0e0;
     }
 
-    .nav-item:hover {
-      color: #00ff99;
+    .footer-link:hover {
+      color: #1f6feb;
+    }
+
+    .footer-link i {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 3px;
     }
   </style>
 </head>
 <body>
+  <header>
+    <input type="text" id="search-bar" placeholder="Search..." />
+  </header>
 
-  <div class="search-container">
-    <input class="search-bar" type="text" placeholder="Search...">
+  <div class="nav-tabs">
+    <div class="tab" onclick="showPosts('daily')">Daily Update</div>
+    <div class="tab" onclick="showPosts('following')">Activities by Your Following</div>
+    <div class="tab" onclick="showPosts('trending')">What's Trending</div>
   </div>
 
-  <div class="tabs">
-    <div class="tab" onclick="showTab('daily')">Daily Update</div>
-    <div class="tab" onclick="showTab('following')">Activities by Your Following</div>
-    <div class="tab" onclick="showTab('trending')">What's Trending</div>
-  </div>
+  <div id="posts" class="posts-container"></div>
 
-  <div id="postContainer" class="posts">
-    <!-- Posts will be inserted here dynamically -->
-  </div>
-
-  <div class="bottom-nav">
-    <a href="home.html" class="nav-item">Home</a>
-    <a href="explore.html" class="nav-item">Explore</a>
-    <a href="messages.html" class="nav-item">Messages</a>
-    <a href="profile.html" class="nav-item">Profile</a>
-    <a href="logout.html" class="nav-item">Log Out</a>
-  </div>
+  <footer>
+    <a href="home.html" class="footer-link"><i class="fas fa-home"></i>Home</a>
+    <a href="explore.html" class="footer-link"><i class="fas fa-hashtag"></i>Explore</a>
+    <a href="messages.html" class="footer-link"><i class="fas fa-envelope"></i>Messages</a>
+    <a href="profile.html" class="footer-link"><i class="fas fa-user"></i>Profile</a>
+    <a href="index.html" class="footer-link"><i class="fas fa-sign-out-alt"></i>Log Out</a>
+  </footer>
 
   <script>
-    const posts = {
+    const postData = {
       daily: [
-        { user: '@skywatch', time: '2h', text: 'The stars are beautiful tonight!', img: 'https://via.placeholder.com/300x150' },
-        { user: '@cosmicdream', time: '1h', text: 'Daily update: more galaxies discovered.', img: 'https://via.placeholder.com/300x150' }
+        { text: "Stay focused and hydrated today!", image: "https://placekitten.com/600/300" },
+        { text: "Here's your morning quote: Believe you can and you're halfway there.", image: "https://placebear.com/600/300" },
+        { text: "Daily Tip: A 10-minute walk boosts your creativity!", image: "https://picsum.photos/600/300?random=1" }
       ],
       following: [
-        { user: '@follower1', time: '45m', text: 'Shared something new!', img: 'https://via.placeholder.com/300x150' },
-        { user: '@astrofan', time: '15m', text: 'Just saw a comet with my telescope!', img: 'https://via.placeholder.com/300x150' }
+        { text: "Alex liked your post!", image: "https://picsum.photos/600/300?random=2" },
+        { text: "Sarah commented: 'Great post!'…", image: "https://picsum.photos/600/300?random=3" },
+        { text: "Tom followed you.", image: "https://picsum.photos/600/300?random=4" }
       ],
       trending: [
-        { user: '@trendingtopic', time: '10m', text: '#UniverseApp is viral!', img: 'https://via.placeholder.com/300x150' },
-        { user: '@buzzstar', time: '5m', text: 'Trending update from space tech world.', img: 'https://via.placeholder.com/300x150' }
+        { text: "#UniverseApp is now trending worldwide!", image: "https://picsum.photos/600/300?random=5" },
+        { text: "The latest update just dropped. Check it out!", image: "https://picsum.photos/600/300?random=6" },
+        { text: "Breaking: Tech innovation shaking up the social media world!", image: "https://picsum.photos/600/300?random=7" }
       ]
     };
 
-    function showTab(type) {
-      const container = document.getElementById('postContainer');
+    function showPosts(type) {
+      const container = document.getElementById('posts');
       container.innerHTML = '';
-      posts[type].forEach(post => {
-        const postEl = document.createElement('div');
-        postEl.className = 'post';
-        postEl.innerHTML = `
-          <div class="post-header">${post.user} · ${post.time}</div>
-          <div class="post-content">${post.text}</div>
-          <img src="${post.img}" alt="Post image">
+      postData[type].forEach(post => {
+        container.innerHTML += `
+          <div class="post">
+            <p>${post.text}</p>
+            <img src="${post.image}" alt="Post Image">
+          </div>
         `;
-        container.appendChild(postEl);
       });
     }
 
-    showTab('daily');
+    // Load daily posts by default
+    showPosts('daily');
   </script>
-
 </body>
 </html>
