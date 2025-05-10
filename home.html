@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hex - Homepage</title>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Sidebar -->
+    <nav class="sidebar">
+      <h2>Hex</h2>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="search.html">Explore</a></li>
+        <li><a href="chat.html">Messages</a></li>
+        <li><a href="profile.html">Profile</a></li>
+        <li onclick="logout()">Logout</li>
+      </ul>
+    </nav>
+
+    <!-- Main Feed -->
+    <main class="main-feed">
+      <div class="tweet-box">
+        <textarea id="tweetInput" placeholder="What's happening?"></textarea>
+        <button onclick="postTweet()">Post</button>
+      </div>
+      <div id="feed" class="feed"></div> <!-- Display user posts here -->
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="sidebar right">
+      <input type="text" placeholder="Search Hex">
+      <div class="trending">
+        <h3>Trending</h3>
+        <ul>
+          <li>#HexUpdate</li>
+          <li>#NewFeatures</li>
+          <li>#UserEngagement</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
