@@ -1,4 +1,4 @@
-// === Firebase Configuration ===
+// === Firebase Config ===
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "your-project-id.firebaseapp.com",
@@ -10,122 +10,37 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-const db = firebase.firestore();
 
-// === Global Button Event Handlers ===
-window.addEventListener('DOMContentLoaded', () => {
+// === UI Elements ===
+const loginBtn = document.getElementById("loginBtn");
+const statusText = document.getElementById("statusText");
 
-  // Login Button
-  document.getElementById("loginBtn")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("email")?.value;
-    const password = document.getElementById("password")?.value;
+loginBtn.addEventListener("click", () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-    if (!email || !password) return alert("Please fill in all fields.");
-
-    auth.signInWithEmailAndPassword(email, password)
-      .then(() => window.location.href = "home.html")
-      .catch(err => alert("Login failed: " + err.message));
-  });
-
-  // Logout Button
-  document.getElementById("logoutBtn")?.addEventListener("click", () => {
-    auth.signOut().then(() => window.location.href = "login.html");
-  });
-
-  // Submit Post Button
-  document.getElementById("submitPostBtn")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    const postText = document.getElementById("postText")?.value;
-    const user = auth.currentUser;
-    if (!user) return alert("Please log in to post.");
-
-    db.collection("posts").add({
-      userId: user.uid,
-      text: postText,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(() => {
-      alert("Post submitted!");
-      document.getElementById("postText").value = "";
-      loadPosts();
-    }).catch(err => alert("Failed to post: " + err.message));
-  });
-
-  // Send Message Button
-  document.getElementById("sendMsgBtn")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    const msg = document.getElementById("messageText")?.value;
-    const user = auth.currentUser;
-    if (!user) return alert("Login required.");
-
-    db.collection("messages").add({
-      userId: user.uid,
-      message: msg,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(() => {
-      alert("Message sent!");
-      document.getElementById("messageText").value = "";
-      loadMessages();
-    }).catch(err => alert("Failed to send message."));
-  });
-
-  // Home Navigation Buttons
-  document.querySelectorAll(".goHomeBtn").forEach(btn => {
-    btn.addEventListener("click", () => window.location.href = "home.html");
-  });
-
-  // Load posts or messages based on current page
-  const pathname = window.location.pathname;
-  if (pathname.includes("home.html")) {
-    auth.onAuthStateChanged(user => {
-      if (!user) return window.location.href = "login.html";
-      loadPosts();
-    });
+  if (!email || !password) {
+    animateStatus("Fill all fields 🌠", "error");
+    return;
   }
 
-  if (pathname.includes("messages.html")) {
-    auth.onAuthStateChanged(user => {
-      if (!user) return window.location.href = "login.html";
-      loadMessages();
-    });
-  }
+  animateStatus("Connecting to the universe...", "loading");
 
-  // Redirect if logged in on login page
-  if (pathname.includes("login.html")) {
-    auth.onAuthStateChanged(user => {
-      if (user) window.location.href = "home.html";
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      animateStatus("Welcome back ✨", "success");
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 1200);
+    })
+    .catch(err => {
+      animateStatus(err.message, "error");
     });
-  }
 });
 
-// === Load Posts ===
-function loadPosts() {
-  const container = document.getElementById("posts");
-  if (!container) return;
-  db.collection("posts").orderBy("timestamp", "desc").get()
-    .then(snapshot => {
-      container.innerHTML = "";
-      snapshot.forEach(doc => {
-        const div = document.createElement("div");
-        div.className = "post";
-        div.textContent = doc.data().text;
-        container.appendChild(div);
-      });
-    });
+// === Animated Status Text ===
+function animateStatus(text, type) {
+  statusText.textContent = text;
+  statusText.className = "status " + type;
 }
 
-// === Load Messages ===
-function loadMessages() {
-  const container = document.getElementById("messages");
-  if (!container) return;
-  db.collection("messages").orderBy("timestamp", "desc").get()
-    .then(snapshot => {
-      container.innerHTML = "";
-      snapshot.forEach(doc => {
-        const div = document.createElement("div");
-        div.className = "message";
-        div.textContent = doc.data().message;
-        container.appendChild(div);
-      });
-    });
-}
