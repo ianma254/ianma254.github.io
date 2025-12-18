@@ -1,225 +1,118 @@
-/* === Global Settings === */
+/* === RESET === */
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  background-color: #0d0d0d;
-  color: #ffffff;
-}
-
-main {
-  padding: 80px 20px 100px; /* Leave space for fixed top and bottom bars */
-}
-
-header, footer {
-  position: fixed;
-  width: 100%;
-  z-index: 10;
-}
-
-/* === Header === */
-header {
-  top: 0;
-  background-color: #1a1a1a;
-  padding: 10px;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-/* === Bottom Ribbon Navigation === */
-footer {
-  bottom: 0;
-  background-color: #1a1a1a;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  border-top: 1px solid #444;
-}
-
-footer a {
-  text-decoration: none;
-  color: #fff;
-  font-size: 18px;
-}
-
-/* === Login Page === */
-.login-container {
-  max-width: 400px;
-  margin: 100px auto;
-  padding: 20px;
-  background-color: #262626;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-  text-align: center;
-}
-
-.login-container input {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 6px;
-}
-
-.login-container button {
-  margin-top: 20px;
-  padding: 12px 25px;
-  font-size: 18px;
-  background-color: #007bff;
+  height: 100vh;
+  overflow: hidden;
+  background: black;
   color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s ease;
 }
 
-.login-container button:hover {
-  background-color: #0056b3;
+/* === MOVING SPACE BACKGROUND === */
+.space-bg {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 20% 20%, #4facfe, transparent),
+              radial-gradient(circle at 80% 80%, #7f00ff, transparent),
+              radial-gradient(circle at 50% 50%, #00f2fe, transparent);
+  animation: drift 20s infinite alternate linear;
+}
+
+@keyframes drift {
+  0% { transform: translate(-10%, -10%); }
+  100% { transform: translate(-40%, -40%); }
+}
+
+/* === LOGIN CARD === */
+.login-card {
+  position: relative;
+  z-index: 2;
+  width: 340px;
+  padding: 30px;
+  background: rgba(20, 20, 30, 0.85);
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(0, 140, 255, 0.6);
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-12px); }
+}
+
+/* === TEXT === */
+.title {
+  font-size: 36px;
+  background: linear-gradient(90deg, #00f2fe, #7f00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  opacity: 0.8;
+  margin-bottom: 25px;
+}
+
+/* === INPUTS === */
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  background: #111;
+  color: white;
+  outline: none;
+  transition: 0.3s;
+}
+
+.login-card input:focus {
+  box-shadow: 0 0 10px #00f2fe;
+}
+
+/* === BUTTON === */
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  font-size: 18px;
+  color: white;
+  background: linear-gradient(270deg, #00f2fe, #7f00ff, #00f2fe);
+  background-size: 400% 400%;
+  cursor: pointer;
+  animation: gradientMove 6s infinite linear;
+  transition: transform 0.2s;
+}
+
+button:hover {
   transform: scale(1.05);
 }
 
-/* === Profile Page === */
-.profile-header {
-  position: relative;
-  text-align: center;
-  background-color: #111;
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
-.profile-header img.bg {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+/* === STATUS TEXT === */
+.status {
+  margin-top: 15px;
+  min-height: 20px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.profile-header img.avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 4px solid #fff;
-  position: absolute;
-  bottom: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-}
+.status.loading { color: #00f2fe; opacity: 1; }
+.status.success { color: #00ff99; opacity: 1; }
+.status.error   { color: #ff4d4d; opacity: 1; }
 
-.profile-body {
-  padding-top: 80px;
-  text-align: center;
-}
-
-.profile-description {
-  font-style: italic;
-  color: #ccc;
-  margin-top: 10px;
-}
-
-.profile-followers {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-  font-weight: bold;
-}
-
-/* === Explore Page === */
-.explore-container {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.user-card {
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  padding: 15px;
-  margin: 15px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 0 8px rgba(0,0,0,0.4);
-}
-
-.user-card img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.user-details {
-  flex: 1;
-  margin-left: 10px;
-}
-
-.follow-btn {
-  padding: 8px 16px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* === Messages Page === */
-.message-header {
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  background-color: #111;
-  padding: 15px;
-  position: sticky;
-  top: 50px;
-  z-index: 5;
-}
-
-.chat-box {
-  background-color: #1e1e1e;
-  margin: 15px;
-  padding: 15px;
-  border-radius: 10px;
-}
-
-.user-list {
-  padding: 10px;
-  background-color: #111;
-  display: none;
-}
-
-/* === Logout Page === */
-.logout-container {
-  text-align: center;
-  padding: 50px 20px;
-}
-
-.logout-container button {
-  padding: 12px 24px;
-  font-size: 18px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.logout-container button:hover {
-  background-color: #b52a3b;
-}
-
-/* === Utility === */
-.home-button {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 18px;
-  color: white;
-  text-decoration: none;
-  background-color: #333;
-  padding: 6px 12px;
-  border-radius: 6px;
-}
-
-.home-button:hover {
-  background-color: #555;
-}
