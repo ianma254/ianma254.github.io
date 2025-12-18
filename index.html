@@ -1,23 +1,33 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to CSS file -->
-</head>
-<body>
-    <div class="login-container">
-        <h2>Login to Your Account</h2>
-        <form action="#">
-            <input type="text" id="username" placeholder="Enter Username" required><br>
-            <input type="password" id="password" placeholder="Enter Password" required><br>
-            <button type="submit" id="loginButton">Login</button>
-        </form>
-    </div>
+  <meta charset="UTF-8">
+  <title>Universe Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="login.css">
 
-    <!-- Link to JavaScript file (will add logic in next step) -->
-    <script src="script.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+</head>
+
+<body>
+  <div class="space-bg"></div>
+
+  <div class="login-card">
+    <h1 class="title">Universe</h1>
+    <p class="subtitle">Sign in to continue</p>
+
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+
+    <button id="loginBtn">
+      <span>Enter</span>
+    </button>
+
+    <p class="status" id="statusText"></p>
+  </div>
+
+  <script src="login.js"></script>
 </body>
 </html>
